@@ -2268,7 +2268,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: League Spartan, Impact, sans-serif;
+  font-family: League Spartan Bold, Impact, sans-serif;
   text-transform: uppercase;
 }
 @supports (-webkit-touch-callout: none) {

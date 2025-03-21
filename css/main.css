@@ -888,6 +888,12 @@ body {
 }
 @font-face {
   font-display: swap;
+  font-family: Roboto Condensed;
+  font-style: normal;
+  src: url(../fonts/RobotoCondensed-VariableFont_wght.woff) format("woff");
+}
+@font-face {
+  font-display: swap;
   font-family: Roboto;
   font-style: normal;
   src: url(../fonts/Roboto-VariableFont_wdth,wght.woff) format("woff");

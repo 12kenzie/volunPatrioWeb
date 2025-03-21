@@ -888,6 +888,12 @@ body {
 }
 @font-face {
   font-display: swap;
+  font-family: League Spartan Bold;
+  font-style: normal;
+  src: url(../fonts/LeagueSpartan-Bold.woff) format("woff");
+}
+@font-face {
+  font-display: swap;
   font-family: Suisse Intl;
   font-style: normal;
   font-weight: 400;

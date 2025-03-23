@@ -415,15 +415,13 @@
  <style>
 /* Existing awards section adjustments */
 #awards .frame {
-    transition: transform 0.3s ease;
     cursor: pointer;
     position: relative;
-    z-index: 1;
+    transition: opacity 0.3s ease;
 }
 
 #awards .frame:hover {
-    transform: scale(1.1);
-    z-index: 2;
+    opacity: 0.9;
 }
 
 /* Modal overlay */
@@ -438,17 +436,25 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .image-modal.active {
     display: flex;
+    opacity: 1;
 }
 
 .modal-content {
     max-width: 90%;
     max-height: 90%;
     object-fit: contain;
-    animation: modalOpen 0.3s ease;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.image-modal.active .modal-content {
+    transform: scale(1);
 }
 
 .close-modal {
@@ -466,9 +472,13 @@
     opacity: 0.8;
 }
 
-@keyframes modalOpen {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+/* Text cursor handling */
+body:not(.typing) {
+    cursor: default;
+}
+
+.typing {
+    cursor: text;
 }
 </style>
 <figure class="frame bs-xl-3 bs-xl-os-12">
@@ -738,35 +748,40 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Get elements
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.close-modal');
     
-    // Add click handlers to all award images
+    // Image click handler
     document.querySelectorAll('#awards .frame img').forEach(img => {
         img.addEventListener('click', (e) => {
             modal.classList.add('active');
             modalImg.src = e.target.src;
+            document.body.classList.remove('typing');
         });
     });
 
     // Close modal handlers
-    closeBtn.addEventListener('click', () => {
+    const closeModal = () => {
         modal.classList.remove('active');
-    });
+        document.body.classList.remove('typing');
+    };
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
-    });
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => e.target === modal && closeModal());
+    document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
 
-    // Close with ESC key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            modal.classList.remove('active');
-        }
+    // Text input handling
+    document.querySelectorAll('input, textarea').forEach(element => {
+        element.addEventListener('focus', () => {
+            document.body.classList.add('typing');
+            modal.style.pointerEvents = 'none';
+        });
+        
+        element.addEventListener('blur', () => {
+            document.body.classList.remove('typing');
+            modal.style.pointerEvents = 'auto';
+        });
     });
 });
 </script>

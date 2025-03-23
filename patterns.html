@@ -90,7 +90,7 @@
         .back-button:hover {
             background-color: #8e24aa;
         }
-        .article-form input, .article-form textarea {
+        .article-form input, .article-form div {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -109,92 +109,116 @@
         .article-form button:hover {
             background-color: #8e24aa;
         }
+        #content {
+            min-height: 150px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Times New Roman', serif;
+        }
+        #content[contenteditable="true"]:empty:before {
+            content: "Start typing...";
+            color: #aaa;
+        }
     </style>
     <script>
         let articles = JSON.parse(localStorage.getItem("articles")) || [];
 
-function saveArticles() {
-    localStorage.setItem("articles", JSON.stringify(articles));
-}
+        function saveArticles() {
+            localStorage.setItem("articles", JSON.stringify(articles));
+        }
 
-function showBlogPost(index) {
-    let article = articles[index];
-    document.getElementById('articles').style.display = 'none';
-    document.getElementById('article-form').style.display = 'none';
-    
-    const postContainer = document.getElementById('blog-post');
-    postContainer.innerHTML = `
-        <button class="back-button" onclick="showArticleList()">Back to Home</button>
-        <h2>${article.title}</h2>
-        <small>by ${article.author}</small>
-        <p><em>${article.caption}</em></p>
-        <div style="white-space: pre-wrap; font-family: 'Courier New', monospace;">
-            ${article.content}
-        </div>
-    `;
-    
-    postContainer.style.display = 'block';
-}
+        function showBlogPost(index) {
+            let article = articles[index];
+            document.getElementById('articles').style.display = 'none';
+            document.getElementById('article-form').style.display = 'none';
+            
+            const postContainer = document.getElementById('blog-post');
+            postContainer.innerHTML = `
+                <button class="back-button" onclick="showArticleList()">Back to Home</button>
+                <h2>${article.title}</h2>
+                <small>by ${article.author}</small>
+                <p><em>${article.caption}</em></p>
+                <div style="white-space: pre-wrap; font-family: 'Courier New', monospace;">
+                    ${article.content}
+                </div>
+            `;
+            
+            postContainer.style.display = 'block';
+        }
 
-function showArticleList() {
-    document.getElementById('articles').style.display = 'block';
-    document.getElementById('blog-post').style.display = 'none';
-    document.getElementById('article-form').style.display = 'none';
-    renderArticles();
-}
+        function showArticleList() {
+            document.getElementById('articles').style.display = 'block';
+            document.getElementById('blog-post').style.display = 'none';
+            document.getElementById('article-form').style.display = 'none';
+            renderArticles();
+        }
 
-function openArticleForm() {
-    document.getElementById('articles').style.display = 'none';
-    document.getElementById('blog-post').style.display = 'none';
-    document.getElementById('article-form').style.display = 'block';
-}
+        function openArticleForm() {
+            document.getElementById('articles').style.display = 'none';
+            document.getElementById('blog-post').style.display = 'none';
+            document.getElementById('article-form').style.display = 'block';
+        }
 
-function submitArticle() {
+        function submitArticle() {
     let title = document.getElementById('title').value;
     let caption = document.getElementById('caption').value;
     let author = document.getElementById('author').value;
-    let content = document.getElementById('content').value;
+    let content = document.getElementById('content').innerHTML;
     
     if (title && caption && author && content) {
-        articles.push({ title, caption, author, content });
+        // Add the new article to the top of the array
+        articles.unshift({ title, caption, author, content });  // Use unshift instead of push
+        
         saveArticles(); // Save to LocalStorage
         showArticleList();
-    }
+}
 }
 
-function deleteArticle(index) {
-    articles.splice(index, 1);
-    saveArticles(); // Save updated list to LocalStorage
-    showArticleList();
-}
-
-function renderArticles() {
-    let container = document.getElementById('articles');
-    container.innerHTML = articles.map((article, index) => `
-        <div class="article">
-            <div class="article-content" onclick="showBlogPost(${index})">
-                <h2>${article.title}</h2>
-                <p><em>${article.caption}</em></p>
-                <small>by ${article.author}</small>
-            </div>
-            <button class="delete-button" onclick="deleteArticle(${index})">Delete</button>
-        </div>
-    `).join('');
-}
-
-// Load articles when page loads
-document.addEventListener("DOMContentLoaded", function() {
-    renderArticles();
-    document.getElementById("content").addEventListener("keydown", function(e) {
-        if (e.key === "Tab") {
-            e.preventDefault();
-            let start = this.selectionStart;
-            let end = this.selectionEnd;
-            this.value = this.value.substring(0, start) + "\t" + this.value.substring(end);
-            this.selectionStart = this.selectionEnd = start + 1;
+        function deleteArticle(index) {
+            articles.splice(index, 1);
+            saveArticles(); // Save updated list to LocalStorage
+            showArticleList();
         }
-    });
-});
+
+        function renderArticles() {
+            let container = document.getElementById('articles');
+            container.innerHTML = articles.map((article, index) => `
+                <div class="article">
+                    <div class="article-content" onclick="showBlogPost(${index})">
+                        <h2>${article.title}</h2>
+                        <p><em>${article.caption}</em></p>
+                        <small>by ${article.author}</small>
+                    </div>
+                    <button class="delete-button" onclick="deleteArticle(${index})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        // Load articles when page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            renderArticles();
+        });
+
+        function formatText(action) {
+            let contentDiv = document.getElementById("content");
+            let selection = window.getSelection();
+            let range = selection.getRangeAt(0);
+            let selectedText = range.toString();
+
+            if (selectedText) {
+                let wrapper;
+                if (action === "bold") {
+                    wrapper = document.createElement("strong");
+                } else if (action === "italic") {
+                    wrapper = document.createElement("em");
+                }
+
+                range.deleteContents(); // Remove selected text
+                range.insertNode(wrapper); // Insert wrapper around selected text
+                wrapper.appendChild(document.createTextNode(selectedText)); // Add selected text inside wrapper
+            }
+        }
     </script>
 </head>
 <body>
@@ -202,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <h2>Valor</h2>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="#">Pattern</a>
+            <a href="patterns.html">Pattern</a>
             <a href="#">Assertion</a>
             <a href="#">Critiques</a>
             <a href="#" onclick="openArticleForm()">Add Article</a>
@@ -217,7 +241,14 @@ document.addEventListener("DOMContentLoaded", function() {
         <input type="text" id="title" placeholder="Title">
         <input type="text" id="caption" placeholder="Caption">
         <input type="text" id="author" placeholder="Author Name">
-        <textarea id="content" placeholder="Content of full paper" rows="10"></textarea>
+        
+        <!-- Formatting Buttons -->
+        <div>
+            <button type="button" onclick="formatText('bold')"><b>B</b></button>
+            <button type="button" onclick="formatText('italic')"><i>I</i></button>
+        </div>
+        
+        <div id="content" contenteditable="true"></div>
         <button onclick="submitArticle()">Submit</button>
     </div>
 </body>

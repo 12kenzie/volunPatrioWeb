@@ -72,13 +72,13 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
 }
 /* Reflection effect */
-.bs-xl-6::after {
+.reflection-overlay-button::after {
   content: '';
   position: absolute;
-  top: 100%; /* Position below the button */
+  top: -100%; /* Start above the button */
   left: 0;
   width: 100%;
-  height: 20px; /* Height of the reflection */
+  height: 100%; /* Cover the entire button */
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.3),
@@ -89,9 +89,9 @@ body {
 }
 
 /* Show reflection on hover */
-.bs-xl-6:hover::after {
+.reflection-overlay-button:hover::after {
   opacity: 1; /* Show the reflection */
-  transform: translateY(-10px); /* Move the reflection up */
+  transform: translateY(100%); /* Move the reflection down to overlay the button */
 }
 .bs-xl-7 {
   width: 29.1662vw;

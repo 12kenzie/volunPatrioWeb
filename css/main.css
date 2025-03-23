@@ -2718,7 +2718,7 @@ i.circle-tag:first-of-type {
   -ms-transform: translateY(-50%);
 }
 i.circle-tag:nth-of-type(2) {
-  background-color: #d62e49;
+  background-color: #c0914c;
   height: 5px;
   left: 0.6em;
   transform: translate(-50%, -50%);

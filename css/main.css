@@ -1365,7 +1365,7 @@ input:-webkit-autofill:hover {
 }
 #loading-overlay {
   align-items: center;
-  background-color: #1d2145;
+  background-color: #290f4c;
   display: block;
   display: flex;
   height: 100vh;

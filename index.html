@@ -410,50 +410,37 @@
 <div class="awards-scroll">
 <span>a</span><span>w</span><span>a</span><span>r</span><span>d</span><span>s</span>
 <figure class="frame bs-xl-3 bs-xl-os-3">
-<img class="lazy" src="images/7.png" data-src="images/7.png" data-src-mobile="images/7.png" data-src-big="images/7.png" alt="">
+    <img class="lazy award-image" src="images/7.png" data-src="images/7.png" alt="Award">
 </figure>
- <section id="awards">
-    <div class="awards-scroll">
-        <!-- Award items -->
-        <figure class="frame">
-            <img src="images/7.png" alt="Award" class="award-image">
-        </figure>
-        
-        <figure class="frame">
-            <img src="images/7.png" alt="Award" class="award-image">
-        </figure>
-    </div>
-</section>
- <style>
-/* Existing awards section adjustments */
+
+<style>
+/* Fixed hover effect */
 #awards .frame {
     cursor: pointer;
     position: relative;
-    transition: transform .2s
-}
-
-#awards .frame:hover {
-    transform: scale(1.5);
-}
-/* Hover effect styling */
-.award-image {
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: pointer;
-    transform-origin: center;
-}
-
-.award-image:hover {
-    transform: scale(1.15); /* 15% enlargement */
-    z-index: 2;
-}
-
-/* Container styling to prevent layout shift */
-.frame {
     display: inline-block;
     overflow: hidden;
     vertical-align: middle;
 }
-/* Modal overlay */
+
+#awards .award-image {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+    width: 100%;
+    height: auto;
+}
+
+#awards .award-image:hover {
+    transform: scale(1.25);
+    z-index: 100;
+}
+
+/* Remove conflicting frame transition */
+#awards .frame {
+    transition: none !important;
+}
+
+/* Modal overlay (keep existing) */
 .image-modal {
     display: none;
     position: fixed;
@@ -499,15 +486,6 @@
 
 .close-modal:hover {
     opacity: 0.8;
-}
-
-/* Text cursor handling */
-body:not(.typing) {
-    cursor: default;
-}
-
-.typing {
-    cursor: text;
 }
 </style>
 <figure class="frame bs-xl-3 bs-xl-os-12">

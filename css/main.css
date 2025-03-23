@@ -1056,7 +1056,7 @@ body.root #hamburger .pointB {
 body.default #hamburger.active path,
 body.init #hamburger.active path,
 body.root #hamburger.active path {
-  stroke: #1d2145;
+  stroke: ##290f4c;
 }
 body.dynamic {
   background-color: var(--colorB);
@@ -1343,7 +1343,7 @@ input:-webkit-autofill:hover {
 }
 #welcome {
   align-items: center;
-  background: #1d2145;
+  background: #290f4c;
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -1398,7 +1398,7 @@ input:-webkit-autofill:hover {
   opacity: 1;
 }
 #loading-overlay span {
-  background: linear-gradient(90deg, #eeeef2, #1d2145, #eeeef2);
+  background: linear-gradient(90deg, #eeeef2, #290f4c, #eeeef2);
   background-clip: text;
   background-size: 200% auto;
   bottom: 4.1666vw;
@@ -1631,7 +1631,7 @@ img {
   margin: 0 1em;
 }
 #menu-slide a {
-  color: #1d2145;
+  color: #290f4c;
   line-height: 1;
 }
 #menu-slide #links div:first-of-type {
@@ -1671,7 +1671,7 @@ img {
   -ms-transform: translateY(0);
 }
 #menu-slide a.text-link:before {
-  background-color: #1d2145;
+  background-color: #290f4c;
 }
 #breadcrumb {
   left: 12.4998vw;
@@ -1746,7 +1746,7 @@ img {
   fill: #d62e49;
 }
 html.no-js #smooth-wrapper {
-  background-color: #1d2145;
+  background-color: #290f4c;
 }
 #webglBubble {
   height: 100%;
@@ -2390,7 +2390,7 @@ h4 .dot {
   color: #c0914c;
 }
 .blue {
-  color: #1d2145;
+  color: #290f4c;
 }
 .big {
   font-size: 28vw;
@@ -4166,7 +4166,7 @@ article.testimonial h3 {
   position: relative;
 }
 #magic-close span i {
-  background-color: #1d2145;
+  background-color: #290f4c;
   border-radius: 2px;
   display: block;
   height: 2px;
@@ -4928,7 +4928,7 @@ ul.service-list li:last-of-type a {
 .services .fp-item {
   background-color: #eeeef2;
   box-shadow: 0 5px 50px rgba(29, 33, 69, 0.5);
-  color: #1d2145;
+  color: #290f4c;
   flex: 8.3332vw;
   overflow: hidden;
   padding: 3.12495vw;
@@ -5471,10 +5471,10 @@ ul.service-list li:last-of-type a {
 @media only screen and (min-width: 768px) {
   .work #work-switch:hover .icon {
     background-color: #eeeef2;
-    border-color: #1d2145;
+    border-color: #290f4c;
   }
   .work #work-switch:hover .icon i {
-    background-color: #1d2145;
+    background-color: #290f4c;
   }
 }
 .work #slide-count {
@@ -5628,7 +5628,7 @@ ul.service-list li:last-of-type a {
   font-weight: 400;
 }
 .work-detail .work-results li.bs-grid {
-  border-bottom: 1px solid #1d2145;
+  border-bottom: 1px solid #290f4c;
   margin-bottom: 1.5em;
   padding-bottom: 1.5em;
 }
@@ -5667,7 +5667,7 @@ ul.service-list li:last-of-type a {
 }
 .mobile,
 .screen {
-  border: 6px solid #1d2145;
+  border: 6px solid #290f4c;
   border-radius: 30px;
   line-height: 0;
   overflow: hidden;
@@ -5832,7 +5832,7 @@ ul.service-list li:last-of-type a {
   z-index: 980;
 }
 #gallery-btn i {
-  background-color: #1d2145;
+  background-color: #290f4c;
   border-radius: 50%;
   height: 100%;
   position: absolute;
@@ -5883,12 +5883,12 @@ ul.service-list li:last-of-type a {
   -ms-transform: translateY(0);
 }
 #i-form {
-  background-color: #1d2145;
+  background-color: #290f4c;
   height: calc(100vh - 20px);
   z-index: 2;
 }
 #i-form .progress-bar svg:nth-of-type(2) path.last {
-  fill: #1d2145;
+  fill: #290f4c;
   stroke: #eeeef2;
   fill: #d62e49;
   stroke: #d62e49;
@@ -6357,7 +6357,7 @@ ul.service-list li:last-of-type a {
     width: 1em;
   }
   .services .flying-panes {
-    background-color: #1d2145;
+    background-color: #290f4c;
     display: block;
     height: auto;
     min-height: auto;
@@ -6367,7 +6367,7 @@ ul.service-list li:last-of-type a {
     width: 91.6652vw;
   }
   .services .fp-item {
-    border: 1px solid #1d2145;
+    border: 1px solid #290f4c;
     border-radius: 4.1666vw;
     box-shadow: none;
     display: block;
@@ -6741,7 +6741,7 @@ ul.service-list li:last-of-type a {
   #usp > span:first-of-type {
     background-color: #eeeef2;
     border-radius: 5px;
-    color: #1d2145;
+    color: #290f4c;
     flex: 0 0 auto;
     font-family: Suisse Intl Bold, Open Sans, Helvetica, sans-serif;
     margin-bottom: 1em;
@@ -6819,7 +6819,7 @@ ul.service-list li:last-of-type a {
     display: none;
   }
   #menu-slide a {
-    color: #1d2145;
+    color: #290f4c;
     line-height: 1;
   }
   #menu-slide > div {
@@ -6914,7 +6914,7 @@ ul.service-list li:last-of-type a {
   }
   .home #hero h1 p {
     bottom: 5vh;
-    color: #1d2145;
+    color: #290f4c;
     left: 12.5%;
     position: absolute;
     width: 75%;
@@ -7172,7 +7172,7 @@ ul.service-list li:last-of-type a {
   }
   .timeline .timeline-side .num-content article {
     background-color: #eeeef2;
-    color: #1d2145;
+    color: #290f4c;
     height: auto;
     width: 100%;
   }
@@ -7560,7 +7560,7 @@ ul.service-list li:last-of-type a {
   }
   .work-detail .mobile,
   .work-detail .screen {
-    border: 4px solid #1d2145;
+    border: 4px solid #290f4c;
     border-radius: 15px;
     overflow: hidden;
   }

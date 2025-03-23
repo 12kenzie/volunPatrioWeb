@@ -2087,7 +2087,7 @@ a.mask-link:before {
 a.mask-link:before {
   clip-path: inset(0 0 0 100%);
   -webkit-clip-path: inset(0 0 0 100%);
-  color: #d62e49;
+  color: #c0914c;
   content: attr(data-id);
   text-align: left;
   transition: clip-path 0.5s cubic-bezier(1, 0, 0, 1);

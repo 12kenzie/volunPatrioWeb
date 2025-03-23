@@ -67,6 +67,10 @@ body {
 .bs-xl-6 {
   width: 24.9996vw;
 }
+.bs-xl-6:hover {
+  transform: translateY(-5px); /* Move the button up */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
 .bs-xl-7 {
   width: 29.1662vw;
 }

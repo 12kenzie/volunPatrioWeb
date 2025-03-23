@@ -3218,7 +3218,7 @@ article.testimonial h3 {
   justify-content: space-between;
   line-height: 1;
   margin-top: 1em;
-  overflow: hidden;
+  overflow: visible;
   padding: 1.5em 2.25em;
   position: relative;
   width: 100%;

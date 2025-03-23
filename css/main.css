@@ -1034,7 +1034,7 @@ body .page-to-page svg path {
 body.default a.mask-link .dot.work-dot svg path,
 body.init a.mask-link .dot.work-dot svg path,
 body.root a.mask-link .dot.work-dot svg path {
-  fill: #d62e49;
+  fill: #c0914c;
 }
 body.default #hamburger path,
 body.init #hamburger path,

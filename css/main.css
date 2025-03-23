@@ -2065,7 +2065,7 @@ a.mask-link span {
   -o-transition: clip-path 0.5s cubic-bezier(1, 0, 0, 1);
 }
 a.mask-link .dot {
-  background-image: url(../images/242536776d164b4840d5.svg);
+  background-image: url(../images/dot.svg);
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: 80%;
@@ -2298,7 +2298,7 @@ h6 {
 h2 .dot,
 h3 .dot,
 h4 .dot {
-  background-image: url(../images/242536776d164b4840d5.svg);
+  background-image: url(../images/dot.svg);
   background-position: bottom;
   background-repeat: no-repeat;
   display: inline-block;
@@ -5271,7 +5271,7 @@ ul.service-list li:last-of-type a {
   position: relative;
 }
 .work #hero ul li:before {
-  background: transparent url(../images/242536776d164b4840d5.svg) no-repeat 50%;
+  background: transparent url(../images/dot.svg) no-repeat 50%;
   background-size: 90%;
   content: "";
   display: block;

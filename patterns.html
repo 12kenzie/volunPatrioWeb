@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valor - Patterns</title>
     <style>
+        .article-content-display {
+            white-space: normal;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        #content {
+            min-height: 150px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Times New Roman', serif;
+            white-space: normal;
+            overflow-y: auto;
+            line-height: 1.5;
+        }
+        
         body {
             font-family: 'Times New Roman', serif;
             margin: 0;
@@ -234,7 +252,7 @@
                 <h2>${article.title}</h2>
                 <small>by ${article.author}</small>
                 <p><em>${article.caption}</em></p>
-                <div class="article-content">
+                <div class="article-content-display">
                     ${article.content}
                 </div>
             `;
@@ -281,7 +299,7 @@
             let title = document.getElementById('title').value;
             let caption = document.getElementById('caption').value;
             let author = document.getElementById('author').value;
-            let content = document.getElementById('content').innerHTML;
+            let content = document.getElementById('content').innerText;
             
             if (title && caption && author && content) {
                 if (currentEditIndex === -1) {
@@ -332,8 +350,8 @@
         }
 
         // Text formatting functions
-        function formatText(command, value = null) {
-            document.execCommand(command, false, value);
+        function formatText(action) {
+            document.execCommand(action, false, null);
             document.getElementById('content').focus();
         }
 

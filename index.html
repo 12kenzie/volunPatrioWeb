@@ -172,7 +172,7 @@
 </div>
 </h1>
 <div id="hero-work-link" class="bs-xl-8 bs-xl-os-10 bs-xs-16 bs-xs-os-0 hero-in">
-<a href="https://valor-pv.netlify.app/slingshot/">
+<a href="#" id="workSpaceLink">
 <span class="link-bg"></span>
 <span class="bs-hero-small upper">Latest project</span>
 <i>
@@ -261,9 +261,8 @@
 
 </h3>
 <article class="bs-xl-7 bs-xs-22 xl-top-2 xs-top-1" data-speed=".95">
- <a href="../work/sling-shot">
-<a href="../work/sling-shot">
- <style>
+<a href="#" class="valor-times-link">
+<style>
      
         .image-container {
             position: relative;
@@ -297,26 +296,20 @@
             height: 550px;
         }
     </style>
-           
-
-
 
 <div class="image-container">
-    
     <img src="images/MOJO.gif" alt="MOJO GIF">
-
-    
     <svg viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="imgMask1">
             <path d="M0 20C0 8.95429 8.95431 0 20 0H640C651.046 0 660 8.95431 660 20V640C660 651.046 651.054 660 640.008 660C612.831 660 563.545 660 528 660C476.451 660 447.549 660 396 660C344.451 660 315.549 660 264 660C212.451 660 183.549 660 132 660C96.4552 660 47.169 660 19.9915 660C8.94585 660 0 651.046 0 640V20Z" fill="black" data-original="M0 20C0 8.95429 8.95431 0 20 0H640C651.046 0 660 8.95431 660 20V640C660 651.046 651.054 660 640.008 660C612.831 660 563.545 660 528 660C476.451 660 447.549 660 396 660C344.451 660 315.549 660 264 660C212.451 660 183.549 660 132 660C96.4552 660 47.169 660 19.9915 660C8.94585 660 0 651.046 0 640V20Z"></path>
         </mask>
     </svg>
 </div>
- </a>
+</a>
 </article>
 </div>
 <article class="bs-xl-9 bs-xl-os-2 bs-xs-22 bs-xs-os-0 xs-top-1">
-<a href="../work/opositive">
+<a href="#" class="valor-times-link">
     <style>
         .opositive-container {
             position: relative;
@@ -362,7 +355,7 @@
 </div>
 <div class="bs-grid xl-top-3 xs-top-1 xs-wrap">
 <article class="bs-xl-8 bs-xl-os-2 bs-xs-22 bs-xs-os-0" data-speed=".9">
-<a href="../work/valaclava">
+<a href="#" class="valor-times-link">
   <style>
     .valaclava-container {
         position: relative;
@@ -408,20 +401,23 @@
 </a>
 </article>
 <article class="bs-xl-6 bs-xl-os-2 bs-xs-22 bs-xs-os-0 xl-top-6 xs-top-1" data-speed="1.05">
-<a href="../work/hoboken-yogi">
+<a href="#" class="view-all-work-link">
 <figure>
 <i class="work-lottie">
 <svg viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="imgMask4">
 <path d="M0 0.5C0 0.223858 0.223858 0 0.5 0H659.5C659.776 0 660 0.223858 660 0.5V0.5C660 0.776142 659.829 1 659.553 1C653.058 1 577.308 1 528 1C476.451 1 447.549 1 396 1C344.451 1 315.549 1 264 1C212.451 1 183.549 1 132 1C82.6923 1 6.94176 1 0.447341 1C0.171199 1 0 0.776142 0 0.5V0.5Z" fill="black"></path>
 </mask>
+</svg>
+</i>
+</figure>
 </a>
 </article>
 </div>
 </div>
 </section>
 <div class="bs-xl-6 bs-xl-os-15 bs-xs-22 bs-xs-os-1 view xl-top-4 xl-bottom-2 xs-top-2">
-<a href="../work/" class="arrow-link al-hover bs-tech"><i><img src="images/arrow-link.svg" alt="line arrow icon"></i>View all work</a>
+<a href="#" class="arrow-link al-hover bs-tech view-all-work-link"><i><img src="images/arrow-link.svg" alt="line arrow icon"></i>View all work</a>
 </div>
 <!-- ATITUDE SECTION -->
 <section id="attitude" class="xs-top-3">
@@ -488,7 +484,7 @@
 </div>
 </section>
 <!-- CLIENTS SECTION -->
-<section id="clients">
+<section id="clients" class="patterns-section">
 <header class="grid-inner bs-grid xs-top-2 xs-wrap xs-reverse">
 <div class="bs-xl-6 bs-sm-8 bs-xs-22 clients-left">
 <div>
@@ -613,6 +609,75 @@
  
  .close-modal:hover {
      opacity: 0.8;
+ }
+ 
+ /* Content modal styles */
+ .content-modal {
+     display: none;
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width: 80%;
+     max-width: 800px;
+     max-height: 80vh;
+     background: #1D2145;
+     border: 1px solid #EEEEF2;
+     padding: 40px;
+     z-index: 1000;
+     box-shadow: 0 0 20px rgba(0,0,0,0.5);
+     overflow-y: auto;
+ }
+ 
+ .content-modal.active {
+     display: block;
+ }
+ 
+ .content-modal h3 {
+     font-size: 2rem;
+     margin-bottom: 20px;
+     color: #EEEEF2;
+ }
+ 
+ .content-modal p {
+     font-size: 1.1rem;
+     line-height: 1.6;
+     color: #EEEEF2;
+     margin-bottom: 20px;
+     font-family: 'Roboto', sans-serif;
+ }
+ 
+ .content-modal .close-content {
+     position: absolute;
+     top: 15px;
+     right: 15px;
+     color: #EEEEF2;
+     font-size: 30px;
+     cursor: pointer;
+ }
+ 
+ /* Circle logo styles */
+ .circle-logo {
+     width: 60px;
+     height: 60px;
+     border-radius: 50%;
+     background: #EEEEF2;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     cursor: pointer;
+     margin: 0 auto;
+     transition: transform 0.3s ease;
+ }
+ 
+ .circle-logo:hover {
+     transform: scale(1.1);
+ }
+ 
+ .circle-logo img {
+     width: 80%;
+     height: 80%;
+     object-fit: contain;
  }
  </style>
  
@@ -843,15 +908,14 @@
 </div>
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>Latest award</h3>
 <div class="bs-grid xs-wrap grid-middle">
-<div class="bs-xl-6 bs-xs-22 xs-top-1"><a class="circle-link view" href="https://patrio-and-volun.netlify.app/slingshot/" aria-label="Sling Shot"><h4 class="cl-inner bs-120 upper">Recommended Papers<div class="circle-icon"><i></i><span><img src="images/arrow-hex.svg" alt="arrow icon with hexagon tip"><img src="images/arrow-hex.svg" alt="arrow icon with hexagon tip"></span></div></h4></a></div>
+<div class="bs-xl-6 bs-xs-22 xs-top-1"><a class="circle-link view recommended-papers-link" href="#"><h4 class="cl-inner bs-120 upper">Recommended Papers<div class="circle-icon"><i></i><span><img src="images/arrow-hex.svg" alt="arrow icon with hexagon tip"><img src="images/arrow-hex.svg" alt="arrow icon with hexagon tip"></span></div></h4></a></div>
 <div class="bs-xl-10 bs-xl-os-2 bs-xs-20 bs-xs-os-0">
 <div class="award-icons view" style="display: flex; justify-content: center; align-items: center; position: relative;">
-    <div style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);">
-        <img src="images/fwa.svg" alt="The FWA" width="88" height="26">
-        <span class="bs-tech">x ��3</span>
+    <div class="circle-logo" id="circleLogo">
+        <img src="images/fwa.svg" alt="The FWA">
     </div>
+    <span class="bs-tech">x 3</span>
 </div>
-
 </div>
 </div>
 </div>
@@ -865,55 +929,55 @@
 </div>
 </header>
 <div class="testimonial-slider draggable xl-top-2 xs-top-1">
-<div class="slider-inner"><div class="slide-item view">
+<div class="slider-inner"><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>Lewis Herrin, CEO / SSI</h3>
 <p><img src="images/Zh6xxUaI3ufuUO9n_lewis.webp" alt="Lewis Herrin"><span>They are friendly, engaging and excellent at what they do. Great ideas and a great interpretation of our needs..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>JULIANNE HOUGH / Kinrgy</h3>
 <p><img src="images/Zh6xw0aI3ufuUO9l_hough.webp" alt="Julianne Hough"><span>Among the plethora of agencies we spoke with, Buzzworthy stood out significantly. Their work not only exceeded our expectations, but what truly set them apart was the sheer talent within their team. They breathed life into our vision with finesse and expertise..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>RICHARD VEVERS, CEO / Ocean Agency</h3>
 <p><img src="images/Zh6xyEaI3ufuUO9q_richard.webp" alt="Richard Vevers"><span>Our site was unveiled in September 2023, and the influx of requests has soared to 10x compared to our previous website. Buzzworthy met our stringent deadlines, but they also catapulted us beyond our expectations, designing an absolute masterpiece..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
-<h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>ROB D’AMBROSIO, FOUNDER / Helias</h3>
+<h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>ROB D'AMBROSIO, FOUNDER / Helias</h3>
 <p><img src="images/Zh6xwkaI3ufuUO9k_helias.webp" alt="Rob D Amrosio"><span>Our website has received numerous design awards and garnered us traffic growth +1000% YOY. I was also very impressed by and appreciative of how the team made anything we asked possible..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>DAVID MARCY, COO / Awestruck</h3>
 <p><img src="images/Zh6xxkaI3ufuUO9o_marcy.webp" alt="David Marcy"><span>They are friendly, engaging and excellent at what they do. Great ideas and a great interpretation of our needs..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>TYLER BARNET / Grapeseed Media</h3>
 <p><img src="images/Zh6xy0aI3ufuUO9t_tyler.webp" alt="Tyler Barnet"><span>Their design skills were uncanny. They produced a top-tier, custom work of art..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>LYNDA CHOU / IQ Research</h3>
 <p><img src="images/Zh6xwUaI3ufuUO9j_chou.webp" alt="Lynda Chou"><span>Our company has grown tremendously over the past year since the launch of our site and our marketing campaigns. Our site traffic has quadrupled since Darren has been working with us on SEO and the leads we are getting are much more qualified..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>Jill S. / Hoboken Yogi</h3>
 <p><img src="images/Zh6xxEaI3ufuUO9m_jill.webp" alt="Jill S."><span>My website is visually stunning and has received many compliments for the design, but what truly stands out to me is the marketing plan created by Darren and Andrew. This plan has orchestrated remarkable growth for my business, leaving me thoroughly impressed..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>Saad Shaikh, CEO / Snooze</h3>
-<p><img src="images/Zh6xyUaI3ufuUO9r_saad.webp" alt="Saad Shaikh"><span>We had great feedback from our brand and our website. When we launched we were indexing very strongly thanks to the content we had on our page, as suggested from the growth marketing lead at Buzzworthy. We were able to book 100’s of sleep test orders thanks to the easy flow of the website..</span></p>
+<p><img src="images/Zh6xyUaI3ufuUO9r_saad.webp" alt="Saad Shaikh"><span>We had great feedback from our brand and our website. When we launched we were indexing very strongly thanks to the content we had on our page, as suggested from the growth marketing lead at Buzzworthy. We were able to book 100's of sleep test orders thanks to the easy flow of the website..</span></p>
 </article>
-</div><div class="slide-item view">
+</div><div class="slide-item view testimonial-clickable">
 <article class="testimonial bs-xl-8 bs-xl-os-1 bs-xs-20">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>MELISSA COHEN, CMO / ModernMD</h3>
-<p><img src="images/Zh6xx0aI3ufuUO9p_mellisa.webp" alt="Melissa Cohen"><span>Beyond their technical skill, I appreciated how they presented themselves. They were professional, and we got a lot of work done. However, they were also casual in an approachable way, so, every time we had a call, it was just a normal dialogue. It was almost like working with a friend and that’s what you want in a partner..</span></p>
+<p><img src="images/Zh6xx0aI3ufuUO9p_mellisa.webp" alt="Melissa Cohen"><span>Beyond their technical skill, I appreciated how they presented themselves. They were professional, and we got a lot of work done. However, they were also casual in an approachable way, so, every time we had a call, it was just a normal dialogue. It was almost like working with a friend and that's what you want in a partner..</span></p>
 </article>
 </div></div>
 <div class="drag-progress">
@@ -926,8 +990,8 @@
 <div class="bs-xl-22 bs-xl-os-1">
 <div class="bs-xl-10 bs-xl-os-9 bs-xs-22 bs-xs-os-0">
 <h3 class="contact-link bs-120 upper">
-<a href="../contact" class="mask-link" data-id="LET’S TALK" aria-label="LET’S TALK">
-<span>LET’S TALK</span>
+<a href="../contact" class="mask-link" data-id="LET'S TALK" aria-label="LET'S TALK">
+<span>LET'S TALK</span>
 <i class="dot work-dot" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); bottom: 150px; left: 685px;">
 <svg viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M10 8.12543L5 11L-2.25534e-07 8.12543L2.3356e-07 2.87401L5 2.18537e-07L10 2.87401L10 8.12543Z" fill="#C49E76"></path>
@@ -1035,6 +1099,62 @@
 </footer>
 </div>
 </main>
+
+<!-- Content Modals -->
+<div class="content-modal" id="workSpaceModal">
+    <span class="close-content">&times;</span>
+    <h3>WORK SPACE</h3>
+    <p>This is the work space content area where you can showcase your latest projects, ideas, and creative works. You can add text, images, videos, or any other content here to display your portfolio items.</p>
+    <p>The modal provides a focused view of your work while maintaining the aesthetic of your website with the same color scheme and design elements.</p>
+</div>
+
+<div class="content-modal" id="valorTimesModal">
+    <span class="close-content">&times;</span>
+    <h3>VALOR TIMES</h3>
+    <p>Welcome to VALOR TIMES - your source for the latest news, articles, and insights from the Valor Web Studio team.</p>
+    <p>Here you'll find our editorial content, thought pieces, and updates on our projects. This space serves as a platform for sharing our perspectives on design, technology, and the creative process.</p>
+</div>
+
+<div class="content-modal" id="viewAllWorkModal">
+    <span class="close-content">&times;</span>
+    <h3>ALL WORK</h3>
+    <p>This is the comprehensive view of all our projects and works. Browse through our complete portfolio to see the range of our capabilities and the diversity of our creative output.</p>
+    <p>Each project represents our commitment to excellence in design and development, showcasing our ability to deliver innovative solutions across various industries and platforms.</p>
+</div>
+
+<div class="content-modal" id="testimonialModal">
+    <span class="close-content">&times;</span>
+    <h3 id="testimonialTitle">TESTIMONIAL</h3>
+    <div id="testimonialContent"></div>
+</div>
+
+<div class="content-modal" id="recommendedPapersModal">
+    <span class="close-content">&times;</span>
+    <h3>RECOMMENDED PAPERS</h3>
+    <p>Here are our recommended readings and papers that have influenced our work and philosophy:</p>
+    <ul>
+        <li>"The Design of Everyday Things" by Don Norman</li>
+        <li>"Don't Make Me Think" by Steve Krug</li>
+        <li>"Atomic Design" by Brad Frost</li>
+        <li>"Sprint" by Jake Knapp</li>
+    </ul>
+</div>
+
+<div class="content-modal" id="circleLogoModal">
+    <span class="close-content">&times;</span>
+    <h3>THE FWA AWARDS</h3>
+    <p>We're proud to have received multiple FWA (Favourite Website Awards) recognitions for our innovative web design work.</p>
+    <p>The FWA is recognized as the ultimate award for cutting-edge innovation on the web, recognizing projects that push the boundaries of creativity and technology.</p>
+</div>
+
+<div class="content-modal" id="assertionModal">
+    <span class="close-content">&times;</span>
+    <h3>ASSERTION</h3>
+    <p style="font-family: 'Roboto', sans-serif; line-height: 1.6;">
+        Historically, religion has played a significant role in the country's culture and politics, with groups such as Iglesia ni Cristo (INC) wielding considerable influence. The INC's recent nationwide rally opposing Vice President Sara Duterte's impeachment raises concerns regarding the separation of Church and State. ACLED (2021) specifies that regulating protests was essential to balance freedom of expression with maintaining public order and promoting the INC's involvement in political matters as a form of democratic engagement. While INC's actions align with democratic rights, these compromise the due process of law and constitutional integrity, as stated in Article 2, Section 6 of the 1987 Constitution. The impeachment process must remain consistent, impartial, and evidence-based to protect democracy and prevent misuse as a political instrument. These contrasting perspectives emphasize the need for accountability, fairness, and respect for constitutional principles when addressing the complexities of impeachment.
+    </p>
+</div>
+
 <!-- scripts --><script>window.ASSETS = ["https://images.prismic.io/buzzworthy/Zh_9YPPdc1huKlPk_ssi-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9X_Pdc1huKlPj_op-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9YfPdc1huKlPl_va-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XPPdc1huKlPg_hy-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XvPdc1huKlPi_oa-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9WvPdc1huKlPb_be-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9W_Pdc1huKlPd_hp-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9WvPdc1huKlPc_ho-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XfPdc1huKlPh_md-mood.jpg?auto=format,compress"]
 </script><script>window.SLIDETITLE = ["<a href='../work/sling-shot' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Sling Shot<\/a>","<a href='../work/opositive' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>O Positive<\/a>","<a href='../work/valaclava' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Valaclava<\/a>","<a href='../work/hoboken-yogi' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Hoboken Yogi<\/a>","<a href='../work/ocean-agency' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Ocean Agency<\/a>","<a href='../work/beemok' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>The BHC<\/a>","<a href='../work/hudson-properties' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Hudson Prop.<\/a>","<a href='../work/helias' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Helias Oils<\/a>","<a href='../work/modern-md' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Modern MD<\/a>"]
 </script><script>window.SLIDESERVICE = ["<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Development<\/li><li>Shopify<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>Marketing<\/li>","<li>Website Design<\/li><li>Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>Shopify<\/li>","<li>Website Design<\/li><li>Development<\/li><li>Marketing<\/li><li>SEO<\/li>"]
@@ -1051,65 +1171,163 @@
 <script src="js/honey-ball.js"></script>
 <script src="js/main-three-scene.js"></script>
 <script src="js/main.js"></script>
-<div class="image-modal" id="imageModal">
-     <span class="close-modal">&times;</span>
-     <img class="modal-content" id="modalImage">
- </div>
- <script>
- document.addEventListener('DOMContentLoaded', () => {
-     const modal = document.getElementById('imageModal');
-     const modalImg = document.getElementById('modalImage');
-     const closeBtn = document.querySelector('.close-modal');
- 
-     // Image click handler
-     document.querySelectorAll('#awards .frame img').forEach(img => {
-         img.addEventListener('click', (e) => {
-             modal.classList.add('active');
-             modalImg.src = e.target.src;
-             document.body.classList.remove('typing');
-         });
-     });
- 
-     // Close modal handlers
-     const closeModal = () => {
-         modal.classList.remove('active');
-         document.body.classList.remove('typing');
-     };
- 
-     closeBtn.addEventListener('click', closeModal);
-     modal.addEventListener('click', (e) => e.target === modal && closeModal());
-     document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
- 
-     // Text input handling
-     document.querySelectorAll('input, textarea').forEach(element => {
-         element.addEventListener('focus', () => {
-             document.body.classList.add('typing');
-             modal.style.pointerEvents = 'none';
-         });
- 
-         element.addEventListener('blur', () => {
-             document.body.classList.remove('typing');
-             modal.style.pointerEvents = 'auto';
-         });
-     });
- });
- </script>
- <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing modal code ...
 
-    // Modified image click handler
-    document.querySelectorAll('#awards .frame img').forEach(img => {
-        img.addEventListener('click', (e) => {
-            e.preventDefault();  // Add this line to prevent default action
-            e.stopPropagation(); // Add this line to prevent event bubbling
-            modal.classList.add('active');
-            modalImg.src = e.target.src;
-            document.body.classList.remove('typing');
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Work Space Modal
+    const workSpaceLink = document.getElementById('workSpaceLink');
+    const workSpaceModal = document.getElementById('workSpaceModal');
+    
+    workSpaceLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        workSpaceModal.classList.add('active');
+        document.body.classList.add('modal-open');
+    });
+
+    // VALOR TIMES Modals
+    const valorTimesLinks = document.querySelectorAll('.valor-times-link');
+    const valorTimesModal = document.getElementById('valorTimesModal');
+    
+    valorTimesLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            valorTimesModal.classList.add('active');
+            document.body.classList.add('modal-open');
         });
     });
 
-    // ... rest of existing script ...
+    // View All Work Modal
+    const viewAllWorkLinks = document.querySelectorAll('.view-all-work-link');
+    const viewAllWorkModal = document.getElementById('viewAllWorkModal');
+    
+    viewAllWorkLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            viewAllWorkModal.classList.add('active');
+            document.body.classList.add('modal-open');
+        });
+    });
+
+    // Testimonial Modals
+    const testimonialItems = document.querySelectorAll('.testimonial-clickable');
+    const testimonialModal = document.getElementById('testimonialModal');
+    const testimonialTitle = document.getElementById('testimonialTitle');
+    const testimonialContent = document.getElementById('testimonialContent');
+    
+    testimonialItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const title = item.querySelector('h3').textContent;
+            const content = item.querySelector('p').innerHTML;
+            
+            testimonialTitle.textContent = title;
+            testimonialContent.innerHTML = content;
+            testimonialModal.classList.add('active');
+            document.body.classList.add('modal-open');
+        });
+    });
+
+    // Recommended Papers Modal
+    const recommendedPapersLink = document.querySelector('.recommended-papers-link');
+    const recommendedPapersModal = document.getElementById('recommendedPapersModal');
+    
+    recommendedPapersLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        recommendedPapersModal.classList.add('active');
+        document.body.classList.add('modal-open');
+    });
+
+    // Circle Logo Modal
+    const circleLogo = document.getElementById('circleLogo');
+    const circleLogoModal = document.getElementById('circleLogoModal');
+    
+    circleLogo.addEventListener('click', (e) => {
+        e.preventDefault();
+        circleLogoModal.classList.add('active');
+        document.body.classList.add('modal-open');
+    });
+
+    // Assertion Modal
+    const assertionBox = document.querySelector('.box:nth-child(3)');
+    const assertionModal = document.getElementById('assertionModal');
+    
+    assertionBox.addEventListener('click', (e) => {
+        e.preventDefault();
+        assertionModal.classList.add('active');
+        document.body.classList.add('modal-open');
+    });
+
+    // Close modals
+    const closeButtons = document.querySelectorAll('.close-content, .close-modal');
+    
+    closeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.content-modal, .image-modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+            document.body.classList.remove('modal-open');
+        });
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('content-modal') || e.target.classList.contains('image-modal')) {
+            document.querySelectorAll('.content-modal, .image-modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+            document.body.classList.remove('modal-open');
+        }
+    });
+
+    // Image Modal
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close-modal');
+
+    document.querySelectorAll('#awards .frame img').forEach(img => {
+        img.addEventListener('click', (e) => {
+            modal.classList.add('active');
+            modalImg.src = e.target.src;
+            document.body.classList.add('modal-open');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    });
+
+    // Scroll to Patterns section from "see more" link
+    document.querySelector('.see-more').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('patterns-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Scroll to Testimonials from Critique box
+    document.querySelector('.box:nth-child(2)').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Add body class when modal is open to prevent scrolling
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                if (document.body.classList.contains('modal-open')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+    });
+
+    observer.observe(document.body, {
+        attributes: true
+    });
 });
 </script>
 </body></html>

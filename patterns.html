@@ -568,5 +568,215 @@
         <div id="content" contenteditable="true"></div>
         <button id="submit-button" onclick="submitArticle()">Submit</button>
     </div>
+    <script>
+        // Replace all localStorage functions with API calls
+        async function loadArticles() {
+            try {
+                const response = await fetch('/api/articles');
+                if (!response.ok) throw new Error('Network response was not ok');
+                return await response.json();
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                return [];
+            }
+        }
+
+        async function saveArticle(article) {
+            try {
+                const response = await fetch('/api/articles', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(article)
+                });
+                if (!response.ok) throw new Error('Network response was not ok');
+                return await response.json();
+            } catch (error) {
+                console.error('Error saving article:', error);
+                return null;
+            }
+        }
+
+        async function updateArticle(id, article) {
+            try {
+                const response = await fetch(`/api/articles/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(article)
+                });
+                if (!response.ok) throw new Error('Network response was not ok');
+                return await response.json();
+            } catch (error) {
+                console.error('Error updating article:', error);
+                return null;
+            }
+        }
+
+        async function deleteArticle(id) {
+            try {
+                const response = await fetch(`/api/articles/${id}`, {
+                    method: 'DELETE'
+                });
+                if (!response.ok) throw new Error('Network response was not ok');
+                return await response.json();
+            } catch (error) {
+                console.error('Error deleting article:', error);
+                return null;
+            }
+        }
+
+        // Modify your existing functions to use these API calls
+        async function showArticleList() {
+            document.getElementById('articles').style.display = 'block';
+            document.getElementById('blog-post').style.display = 'none';
+            document.getElementById('article-form').style.display = 'none';
+            articles = await loadArticles();
+            renderArticles();
+        }
+
+        async function submitArticle() {
+            let title = document.getElementById('title').value;
+            let caption = document.getElementById('caption').value;
+            let author = document.getElementById('author').value;
+            let content = document.getElementById('content').innerHTML;
+
+            content = normalizeHTML(content);
+
+            if (title && caption && author && content) {
+                const articleData = { title, caption, author, content };
+                
+                if (currentEditIndex === -1) {
+                    await saveArticle(articleData);
+                } else {
+                    const articleId = articles[currentEditIndex].id;
+                    await updateArticle(articleId, articleData);
+                }
+                
+                showArticleList();
+            }
+        }
+
+        async function deleteArticle(index, event) {
+            event.stopPropagation();
+            
+            if (confirm('Are you sure you want to delete this article?')) {
+                const articleId = articles[index].id;
+                await deleteArticle(articleId);
+                showArticleList();
+            }
+        }
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Database file
+const DB_FILE = path.join(__dirname, 'articles.json');
+
+// Initialize database if it doesn't exist
+if (!fs.existsSync(DB_FILE)) {
+    fs.writeFileSync(DB_FILE, JSON.stringify([]));
+}
+
+// API Routes
+app.get('/api/articles', (req, res) => {
+    fs.readFile(DB_FILE, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to read articles' });
+        }
+        res.json(JSON.parse(data));
+    });
+});
+
+app.post('/api/articles', (req, res) => {
+    const newArticle = {
+        ...req.body,
+        id: Date.now().toString(),
+        createdAt: new Date().toISOString()
+    };
+
+    fs.readFile(DB_FILE, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to read articles' });
+        }
+
+        const articles = JSON.parse(data);
+        articles.unshift(newArticle);
+
+        fs.writeFile(DB_FILE, JSON.stringify(articles), (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Failed to save article' });
+            }
+            res.json(newArticle);
+        });
+    });
+});
+
+app.put('/api/articles/:id', (req, res) => {
+    fs.readFile(DB_FILE, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to read articles' });
+        }
+
+        const articles = JSON.parse(data);
+        const index = articles.findIndex(a => a.id === req.params.id);
+
+        if (index === -1) {
+            return res.status(404).json({ error: 'Article not found' });
+        }
+
+        articles[index] = { ...articles[index], ...req.body };
+
+        fs.writeFile(DB_FILE, JSON.stringify(articles), (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Failed to update article' });
+            }
+            res.json(articles[index]);
+        });
+    });
+});
+
+app.delete('/api/articles/:id', (req, res) => {
+    fs.readFile(DB_FILE, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to read articles' });
+        }
+
+        const articles = JSON.parse(data);
+        const filtered = articles.filter(a => a.id !== req.params.id);
+
+        fs.writeFile(DB_FILE, JSON.stringify(filtered), (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Failed to delete article' });
+            }
+            res.json({ success: true });
+        });
+    });
+});
+
+// Serve frontend
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+    </script>
 </body>
 </html>

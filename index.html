@@ -986,4 +986,22 @@
      });
  });
  </script>
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing modal code ...
+
+    // Modified image click handler
+    document.querySelectorAll('#awards .frame img').forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.preventDefault();  // Add this line to prevent default action
+            e.stopPropagation(); // Add this line to prevent event bubbling
+            modal.classList.add('active');
+            modalImg.src = e.target.src;
+            document.body.classList.remove('typing');
+        });
+    });
+
+    // ... rest of existing script ...
+});
+</script>
 </body></html>

@@ -227,16 +227,10 @@
         }
 
         function showArticleList() {
-             if (currentEditIndex !== -1) {
-             let confirmExit = confirm("You have unsaved changes. Are you sure you want to leave without saving?");
-             if (!confirmExit) return; // Stop going back if the user cancels
-             }
-            
             document.getElementById('articles').style.display = 'block';
             document.getElementById('blog-post').style.display = 'none';
             document.getElementById('article-form').style.display = 'none';
             renderArticles();
-            currentEditIndex = -1; // Reset edit index after returning
         }
 
         function openArticleForm(isEdit = false, index = -1) {

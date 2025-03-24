@@ -59,6 +59,10 @@
             background-color: #f0f0f0;
             transform: translateY(-3px);
         }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
         .delete-button {
             background-color: #d32f2f;
             color: white;
@@ -69,6 +73,17 @@
         }
         .delete-button:hover {
             background-color: #b71c1c;
+        }
+        .edit-button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .edit-button:hover {
+            background-color: #1565c0;
         }
         .blog-post, .article-form {
             display: none;
@@ -120,9 +135,89 @@
             content: "Start typing...";
             color: #aaa;
         }
+        .formatting-toolbar {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .formatting-toolbar button {
+            padding: 5px 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .formatting-toolbar button:hover {
+            background-color: #f0f0f0;
+        }
+        .formatting-toolbar select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        /* Indentation and alignment CSS for the editor and display */
+        #content blockquote {
+            margin-left: 20px;
+            padding-left: 10px;
+            border-left: 3px solid #ddd;
+        }
+        
+        #content div[style*="margin-left"] {
+            border-left: 2px solid #eee;
+            padding-left: 5px;
+        }
+        
+        /* Explicitly display indentation in the editor */
+        #content p {
+            margin: 0;
+            padding: 5px 0;
+            min-height: 1em;
+        }
+        
+        #content p[style*="margin-left"] {
+            border-left: 3px solid #ddd;
+            padding-left: 10px;
+        }
+        
+        /* Alignment styles */
+        #content .text-left {
+            text-align: left;
+        }
+        
+        #content .text-center {
+            text-align: center;
+        }
+        
+        #content .text-right {
+            text-align: right;
+        }
+        
+        #content .text-justify {
+            text-align: justify;
+        }
+        
+        /* Indentation level indicators */
+        #content .indent-1 { margin-left: 20px; }
+        #content .indent-2 { margin-left: 40px; }
+        #content .indent-3 { margin-left: 60px; }
+        #content .indent-4 { margin-left: 80px; }
+        
+        /* Tab highlight indicator */
+        #content:focus {
+            outline: 2px solid #6a1b9a;
+            outline-offset: -2px;
+        }
     </style>
     <script>
         let articles = JSON.parse(localStorage.getItem("articles")) || [];
+        let currentEditIndex = -1;
+        let indentLevel = 0; // Track current indentation level
 
         function saveArticles() {
             localStorage.setItem("articles", JSON.stringify(articles));
@@ -139,7 +234,7 @@
                 <h2>${article.title}</h2>
                 <small>by ${article.author}</small>
                 <p><em>${article.caption}</em></p>
-                <div style="white-space: pre-wrap; font-family: 'Courier New', monospace;">
+                <div class="article-content">
                     ${article.content}
                 </div>
             `;
@@ -154,31 +249,69 @@
             renderArticles();
         }
 
-        function openArticleForm() {
+        function openArticleForm(isEdit = false, index = -1) {
             document.getElementById('articles').style.display = 'none';
             document.getElementById('blog-post').style.display = 'none';
+            
+            // Reset form fields
+            if (!isEdit) {
+                document.getElementById('title').value = '';
+                document.getElementById('caption').value = '';
+                document.getElementById('author').value = '';
+                document.getElementById('content').innerHTML = '';
+                document.getElementById('form-title').innerText = 'Add New Article';
+                document.getElementById('submit-button').innerText = 'Submit';
+                currentEditIndex = -1;
+            } else {
+                // Fill form with article data for editing
+                const article = articles[index];
+                document.getElementById('title').value = article.title;
+                document.getElementById('caption').value = article.caption;
+                document.getElementById('author').value = article.author;
+                document.getElementById('content').innerHTML = article.content;
+                document.getElementById('form-title').innerText = 'Edit Article';
+                document.getElementById('submit-button').innerText = 'Update';
+                currentEditIndex = index;
+            }
+            
             document.getElementById('article-form').style.display = 'block';
         }
 
         function submitArticle() {
-    let title = document.getElementById('title').value;
-    let caption = document.getElementById('caption').value;
-    let author = document.getElementById('author').value;
-    let content = document.getElementById('content').innerHTML;
-    
-    if (title && caption && author && content) {
-        // Add the new article to the top of the array
-        articles.unshift({ title, caption, author, content });  // Use unshift instead of push
-        
-        saveArticles(); // Save to LocalStorage
-        showArticleList();
-}
-}
+            let title = document.getElementById('title').value;
+            let caption = document.getElementById('caption').value;
+            let author = document.getElementById('author').value;
+            let content = document.getElementById('content').innerHTML;
+            
+            if (title && caption && author && content) {
+                if (currentEditIndex === -1) {
+                    // Add new article to the top of the array
+                    articles.unshift({ title, caption, author, content });
+                } else {
+                    // Update existing article
+                    articles[currentEditIndex] = { title, caption, author, content };
+                }
+                
+                saveArticles(); // Save to LocalStorage
+                showArticleList();
+            }
+        }
 
-        function deleteArticle(index) {
-            articles.splice(index, 1);
-            saveArticles(); // Save updated list to LocalStorage
-            showArticleList();
+        function deleteArticle(index, event) {
+            // Prevent the click from propagating to the parent (which would open the article)
+            event.stopPropagation();
+            
+            if (confirm('Are you sure you want to delete this article?')) {
+                articles.splice(index, 1);
+                saveArticles(); // Save updated list to LocalStorage
+                showArticleList();
+            }
+        }
+
+        function editArticle(index, event) {
+            // Prevent the click from propagating to the parent (which would open the article)
+            event.stopPropagation();
+            openArticleForm(true, index);
         }
 
         function renderArticles() {
@@ -190,36 +323,167 @@
                         <p><em>${article.caption}</em></p>
                         <small>by ${article.author}</small>
                     </div>
-                    <button class="delete-button" onclick="deleteArticle(${index})">Delete</button>
+                    <div class="button-group">
+                        <button class="edit-button" onclick="editArticle(${index}, event)">Edit</button>
+                        <button class="delete-button" onclick="deleteArticle(${index}, event)">Delete</button>
+                    </div>
                 </div>
             `).join('');
-        } 
+        }
+
+        // Text formatting functions
+        function formatText(command, value = null) {
+            document.execCommand(command, false, value);
+            document.getElementById('content').focus();
+        }
+
+        function indent() {
+            // Custom indentation that adds a visible class
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const currentNode = range.startContainer.parentNode;
+                
+                // Find the closest paragraph or div
+                let paragraph = currentNode;
+                while (paragraph && paragraph.tagName !== 'P' && paragraph.tagName !== 'DIV' && paragraph.id !== 'content') {
+                    paragraph = paragraph.parentNode;
+                }
+                
+                if (paragraph && paragraph.id !== 'content') {
+                    indentLevel = (paragraph.getAttribute('data-indent') || 0);
+                    indentLevel = parseInt(indentLevel) + 1;
+                    if (indentLevel > 4) indentLevel = 4; // Max level
+                    
+                    paragraph.setAttribute('data-indent', indentLevel);
+                    paragraph.className = paragraph.className.replace(/indent-\d/g, '');
+                    paragraph.classList.add(`indent-${indentLevel}`);
+                } else {
+                    // If no paragraph found, use the execCommand
+                    document.execCommand('indent', false, null);
+                }
+            }
+        }
+
+        function outdent() {
+            // Custom outdent that reduces the visible class
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const currentNode = range.startContainer.parentNode;
+                
+                // Find the closest paragraph or div
+                let paragraph = currentNode;
+                while (paragraph && paragraph.tagName !== 'P' && paragraph.tagName !== 'DIV' && paragraph.id !== 'content') {
+                    paragraph = paragraph.parentNode;
+                }
+                
+                if (paragraph && paragraph.id !== 'content') {
+                    indentLevel = (paragraph.getAttribute('data-indent') || 0);
+                    indentLevel = parseInt(indentLevel) - 1;
+                    if (indentLevel < 0) indentLevel = 0; // Min level
+                    
+                    paragraph.setAttribute('data-indent', indentLevel);
+                    paragraph.className = paragraph.className.replace(/indent-\d/g, '');
+                    if (indentLevel > 0) {
+                        paragraph.classList.add(`indent-${indentLevel}`);
+                    }
+                } else {
+                    // If no paragraph found, use the execCommand
+                    document.execCommand('outdent', false, null);
+                }
+            }
+        }
+
+        function changeFontSize() {
+            const size = document.getElementById('font-size').value;
+            formatText('fontSize', size);
+        }
+
+        function changeFont() {
+            const font = document.getElementById('font-family').value;
+            formatText('fontName', font);
+        }
+
+        function insertList(type) {
+            formatText(type === 'ordered' ? 'insertOrderedList' : 'insertUnorderedList');
+        }
+
+        function changeTextAlignment(alignment) {
+            // First remove any existing alignment classes
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const currentNode = range.startContainer.parentNode;
+                
+                // Find the closest paragraph or div
+                let paragraph = currentNode;
+                while (paragraph && paragraph.tagName !== 'P' && paragraph.tagName !== 'DIV' && paragraph.id !== 'content') {
+                    paragraph = paragraph.parentNode;
+                }
+                
+                if (paragraph && paragraph.id !== 'content') {
+                    paragraph.classList.remove('text-left', 'text-center', 'text-right', 'text-justify');
+                    paragraph.classList.add(`text-${alignment.toLowerCase()}`);
+                }
+            }
             
+            // Also apply the execCommand for better compatibility
+            formatText('justify' + alignment);
+        }
+
+        function createLink() {
+            const url = prompt('Enter URL:', 'http://');
+            if (url) {
+                formatText('createLink', url);
+            }
+        }
+
+        function insertImage() {
+            const url = prompt('Enter image URL:', 'http://');
+            if (url) {
+                formatText('insertImage', url);
+            }
+        }
+
+        // Handle Tab key in the editor
+        function handleTabKey(e) {
+            if (e.key === 'Tab') {
+                // Prevent default tab behavior (which would move focus)
+                e.preventDefault();
+                
+                if (e.shiftKey) {
+                    // Shift+Tab = outdent
+                    outdent();
+                } else {
+                    // Tab = indent
+                    indent();
+                }
+            }
+        }
 
         // Load articles when page loads
         document.addEventListener("DOMContentLoaded", function() {
             renderArticles();
-        });
-
-        function formatText(action) {
-            let contentDiv = document.getElementById("content");
-            let selection = window.getSelection();
-            let range = selection.getRangeAt(0);
-            let selectedText = range.toString();
-
-            if (selectedText) {
-                let wrapper;
-                if (action === "bold") {
-                    wrapper = document.createElement("strong");
-                } else if (action === "italic") {
-                    wrapper = document.createElement("em");
+            
+            const contentEditor = document.getElementById('content');
+            
+            // Add a listener to create paragraphs on Enter key
+            contentEditor.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    // Insert a new paragraph instead of a <br>
+                    document.execCommand('formatBlock', false, 'p');
                 }
-
-                range.deleteContents(); // Remove selected text
-                range.insertNode(wrapper); // Insert wrapper around selected text
-                wrapper.appendChild(document.createTextNode(selectedText)); // Add selected text inside wrapper
-            }
-        }
+                
+                // Handle tab key for indentation
+                handleTabKey(e);
+            });
+            
+            // Additional fix for Tab key in Firefox
+            contentEditor.addEventListener('keypress', function(e) {
+                handleTabKey(e);
+            });
+        });
     </script>
 </head>
 <body>
@@ -239,19 +503,61 @@
     <div class="container blog-post" id="blog-post"></div>
     <div class="container article-form" id="article-form">
         <button class="back-button" onclick="showArticleList()">Back to Home</button>
-        <h2>Add New Article</h2>
+        <h2 id="form-title">Add New Article</h2>
         <input type="text" id="title" placeholder="Title">
         <input type="text" id="caption" placeholder="Caption">
         <input type="text" id="author" placeholder="Author Name">
         
-        <!-- Formatting Buttons -->
-        <div>
+        <!-- Enhanced Formatting Toolbar -->
+        <div class="formatting-toolbar">
+            <!-- Text style -->
             <button type="button" onclick="formatText('bold')"><b>B</b></button>
             <button type="button" onclick="formatText('italic')"><i>I</i></button>
+            <button type="button" onclick="formatText('underline')"><u>U</u></button>
+            <button type="button" onclick="formatText('strikethrough')"><s>S</s></button>
+            
+            <!-- Alignment -->
+            <button type="button" onclick="changeTextAlignment('Left')">Left</button>
+            <button type="button" onclick="changeTextAlignment('Center')">Center</button>
+            <button type="button" onclick="changeTextAlignment('Right')">Right</button>
+            <button type="button" onclick="changeTextAlignment('Full')">Justify</button>
+            
+            <!-- Indentation -->
+            <button type="button" onclick="indent()">Indent →</button>
+            <button type="button" onclick="outdent()">← Outdent</button>
+            
+            <!-- Lists -->
+            <button type="button" onclick="insertList('unordered')">• List</button>
+            <button type="button" onclick="insertList('ordered')">1. List</button>
+            
+            <!-- Font controls -->
+            <select id="font-family" onchange="changeFont()">
+                <option value="">Font</option>
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Courier New">Courier New</option>
+            </select>
+            
+            <select id="font-size" onchange="changeFontSize()">
+                <option value="">Size</option>
+                <option value="1">Small</option>
+                <option value="3">Normal</option>
+                <option value="5">Large</option>
+                <option value="7">Huge</option>
+            </select>
+            
+            <!-- Links and media -->
+            <button type="button" onclick="createLink()">Link</button>
+            <button type="button" onclick="insertImage()">Image</button>
+            
+            <!-- Clear formatting -->
+            <button type="button" onclick="formatText('removeFormat')">Clear Format</button>
         </div>
         
         <div id="content" contenteditable="true"></div>
-        <button onclick="submitArticle()">Submit</button>
+        <button id="submit-button" onclick="submitArticle()">Submit</button>
     </div>
 </body>
 </html>

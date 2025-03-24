@@ -1125,8 +1125,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
         function showArticle(articleNumber, event) {
     if (event) {
-        event.preventDefault(); // Stops default behavior (like jumping to the top)
-        event.stopPropagation(); // Prevents bubbling
+        event.preventDefault(); // Stop the page from jumping to the top
+        event.stopPropagation(); // Prevent any parent events from triggering
     }
 
     let title = `Article ${articleNumber}`;
@@ -1140,7 +1140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('articleOverlay').style.display = 'block';
     document.getElementById('articleDisplay').style.display = 'block';
 
-    return false; // Ensures no further action occurs
+    return false; // Stops any default action
 }
 
         function closeArticle() {

@@ -408,12 +408,28 @@
 <article class="box">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>PAPER 1</h3>
 <h4 class="bs-60 upper">PATTERN</h4>
-<p style="font-family: Roboto; line-height: 1.4; cursor: pointer;">
-  Patterns of thought, framed—whether defining, dissecting, or describing, each paper traces a path...
-  <a onclick="document.getElementById('patterns-section').scrollIntoView({behavior: 'smooth'});" 
-     style="color: inherit; text-decoration: none; cursor: pointer;">
-    see more <span style="color: #ff66b2;">✨</span>
-  </a></p>
+<style>
+        .see-more {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .see-more:hover {
+            text-decoration: underline;
+        }
+        .sparkle {
+            color: #ff66b2;
+        }
+        .patterns-section {
+            scroll-margin-top: 20px; /* Adjust this to account for fixed headers if needed */
+        }
+    </style>
+    <p style="font-family: sans-serif; line-height: 1.4; margin-bottom: 50px; cursor: pointer;">
+        Patterns of thought, framed—whether defining, dissecting, or describing, each paper traces a path...
+        <span class="see-more" onclick="document.getElementById('patterns-section').scrollIntoView({behavior: 'smooth'});">
+            see more <span class="sparkle">✨</span>
+        </span>
+    </p>
 </article>
 </div><div class="b-end stack">
 <article class="box">
@@ -452,7 +468,7 @@
 </div>
 <p class="sm-top-1 split lines">At Buzzworthy, our goal is to exceed expectations and build lasting partnerships. Through open communication, trust, and shared aspirations, we establish relationships built on mutual respect, fostering collaborative journeys toward greatness.</p>
 </div>
-<header id="patterns-section">
+<div id="patterns-section" class="patterns-section"><header id="patterns-section">
   <a href="patterns.html">
     <h3 class="bs-120 upper split chars" style="font-size: 7.333vw;">
       EYE-OPENING<i class="dot view"></i>

@@ -225,66 +225,7 @@
 
             postContainer.style.display = 'block';
         }
-        const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
-
-const app = express();
-const PORT = 3000;
-
-// Middleware
-app.use(bodyParser.json());
-app.use(express.static('public'));
-
-// Database file
-const DB_FILE = 'articles.json';
-
-// Initialize database if it doesn't exist
-if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(DB_FILE, JSON.stringify([]));
-}
-
-// API Routes
-app.get('/api/articles', (req, res) => {
-    const articles = JSON.parse(fs.readFileSync(DB_FILE));
-    res.json(articles);
-});
-
-app.post('/api/articles', (req, res) => {
-    const articles = JSON.parse(fs.readFileSync(DB_FILE));
-    articles.unshift(req.body);
-    fs.writeFileSync(DB_FILE, JSON.stringify(articles));
-    res.json({ success: true });
-});
-
-app.put('/api/articles/:id', (req, res) => {
-    const articles = JSON.parse(fs.readFileSync(DB_FILE));
-    const index = articles.findIndex(a => a.id === req.params.id);
-    if (index !== -1) {
-        articles[index] = req.body;
-        fs.writeFileSync(DB_FILE, JSON.stringify(articles));
-        res.json({ success: true });
-    } else {
-        res.status(404).json({ error: 'Article not found' });
-    }
-});
-
-app.delete('/api/articles/:id', (req, res) => {
-    const articles = JSON.parse(fs.readFileSync(DB_FILE));
-    const filtered = articles.filter(a => a.id !== req.params.id);
-    fs.writeFileSync(DB_FILE, JSON.stringify(filtered));
-    res.json({ success: true });
-});
-
-// Serve HTML
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-app.listen(PORT, () => {
-    console.log(Server running on http://localhost:${PORT});
-});
+    
 
         function showArticleList() {
             document.getElementById('articles').style.display = 'block';

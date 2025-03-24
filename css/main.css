@@ -2358,7 +2358,7 @@ h4 .dot {
   line-height: 0;
 }
 .bs-160 {
-  font-size: clamp(24px, 11.2vw, 180px);
+  font-size: clamp(24px, 10.2vw, 180px);
   line-height: 0;
 }
 .bs-180 {

@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -21,6 +23,120 @@
 <link rel="stylesheet" href="css/main.css">
 <link href='https://fonts.googleapis.com/css?family=League Spartan' rel='stylesheet'>
 <style type="text/css"> body, #hero { min-height: 100vh; } </style>
+<style>
+    /* Modal styles */
+    .content-modal, .image-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .content-modal.active, .image-modal.active {
+        display: flex;
+        opacity: 1;
+    }
+    
+    .content-modal {
+        background: #1D2145;
+        border: 1px solid #EEEEF2;
+        padding: 40px;
+        max-width: 800px;
+        max-height: 80vh;
+        margin: auto;
+        overflow-y: auto;
+    }
+    
+    .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+    }
+    
+    .close-content, .close-modal {
+        position: absolute;
+        top: 25px;
+        right: 35px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        z-index: 1001;
+    }
+    
+    .close-content:hover, .close-modal:hover {
+        opacity: 0.8;
+    }
+    
+    /* Pattern modal styles */
+    .pattern-modal {
+        text-align: center;
+    }
+    
+    .pattern-modal img {
+        max-width: 100%;
+        max-height: 60vh;
+        margin-bottom: 20px;
+    }
+    
+    /* Circle logo styles */
+    .circle-logo {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #EEEEF2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin: 0 auto;
+        transition: transform 0.3s ease;
+    }
+    
+    .circle-logo:hover {
+        transform: scale(1.1);
+    }
+    
+    .circle-logo img {
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
+    }
+    
+    /* Box cursor pointer */
+    .box {
+        cursor: pointer;
+    }
+    
+    /* Modal open body style */
+    body.modal-open {
+        overflow: hidden;
+    }
+    
+    /* See more link style */
+    .see-more {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .see-more:hover {
+        text-decoration: underline;
+    }
+    
+    .sparkle {
+        color: #ff66b2;
+    }
+</style>
 </head>
 <body class="loading init">
 <section id="webglBubble"></section>
@@ -44,7 +160,7 @@
 </div>
 </div>
 <div id="hamburger" style="pointer-events: none;">
-
+<svg width="30" height="61" viewBox="0 0 30 61" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1490_325)">
 <path class="lineA" d="M5.07849 11V60" stroke="#EEEEF2" stroke-width="2"></path>
 <path class="lineB" d="M15.0785 16V45" stroke="#EEEEF2" stroke-width="2"></path>
@@ -112,32 +228,6 @@
 </div>
 <!-- AJAX CONTENT HOLDER -->
 <main id="smooth-wrapper">
-
-
-<path class="handle-a" fill-rule="evenodd" clip-rule="evenodd" d="M12.2601 16.0778C12.1641 16.1738 12.2321 16.3379 12.3679 16.3379V16.3379C12.4073 16.3379 12.4452 16.3226 12.4736 16.2953L14.9293 13.9292L17.3586 11.4999C17.4027 11.4558 17.4215 11.3924 17.4085 11.3314V11.3314C17.3781 11.1886 17.2015 11.1364 17.0983 11.2396L12.2601 16.0778Z" stroke="white" stroke-width="2"></path>
-<path class="tip-a" fill-rule="evenodd" clip-rule="evenodd" d="M14.9293 13.9292L12.5735 15.5735L16.5735 11.5735L14.9293 13.9292Z" fill="white"></path>
-<path class="handle-b" fill-rule="evenodd" clip-rule="evenodd" d="M27.4142 29.9237C26.6332 30.7047 26.6332 31.9711 27.4142 32.7521L43.5938 48.9316C43.8613 49.1992 44.1993 49.3854 44.5684 49.4685L50.8933 50.8933L49.4685 44.5685C49.3854 44.1993 49.1992 43.8613 48.9316 43.5938L32.7521 27.4142C31.971 26.6332 30.7047 26.6332 29.9237 27.4142L27.4142 29.9237Z" stroke="white" stroke-width="2"></path>
-<path class="tip-b" fill-rule="evenodd" clip-rule="evenodd" d="M49.7919 50.1349L45 49L49 45L49.7919 50.1349Z" fill="white"></path>
-</svg>
-</a>
-<!-- PATTERN BG -->
-<div class="scrollPattern">
-<div class="patternTop">
-<img class="lazy" src="images/pattern-top-prel.png" data-src="../img/pattern-top.webp" data-src-big="../img/pattern-top.webp" alt="Hexagon line pattern png image">
-</div>
-<div class="patternBottom">
-<img class="lazy" src="images/pattern-bottom-prel.png" data-src="../img/pattern-bottom.webp" data-src-big="../img/pattern-bottom.webp" alt="Hexagon line pattern png image">
-</div>
-</div>
-<div id="drag-ico">
-<span></span>
-<svg viewBox="0 0 54 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="dot" fill-rule="evenodd" clip-rule="evenodd" d="M25.3519 10L23 6L25.3519 2L29.6485 2L32 6L29.6485 10L25.3519 10Z" stroke="#EEEEF2" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
-<path class="ar-1" fill-rule="evenodd" clip-rule="evenodd" d="M7 12L1 6.5L7 0.999996L7 12Z" stroke="#EEEEF2" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-<path class="ar-2" fill-rule="evenodd" clip-rule="evenodd" d="M47 1L53 6.5L47 12L47 1Z" stroke="#EEEEF2" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
-</svg>
-</div>
-<!-- SMOOTH SCROLLING CONTENT -->
 <div class="content home" data-work="init" style="background-color:#290f4c;">
 <div id="breadcrumb">
 <span class="bs-tech hero-in">Valor Web Studio</span>
@@ -214,10 +304,11 @@
 <div class="grid-inner">
 <div class="line-anim">
 <svg width="11" height="9" xmlns="http://www.w3.org/2000/svg">
-
+<path d="m10.407 4.5-2.555 4H3.148l-2.555-4 2.555-4h4.704l2.555 4Z" fill="#1D2145" stroke="#EEEEF2" fill-rule="evenodd"></path>
+</svg>
 <div></div>
 <svg width="11" height="9" xmlns="http://www.w3.org/2000/svg">
-
+<path d="m10.407 4.5-2.555 4H3.148l-2.555-4 2.555-4h4.704l2.555 4Z" fill="#1D2145" stroke="#EEEEF2" fill-rule="evenodd"></path>
 </svg>
 </div>
 <div class="bs-grid xs-wrap">
@@ -258,45 +349,37 @@
     <div style="display: inline-block;">
       <div style="position: relative; display: inline-block; transform-origin: 0% 100%; transform: translate(0px, 0%);">S</div> <i class="dot view" style="display: inline-block;"></i>
 </h3>
-
-</h3>
 <article class="bs-xl-7 bs-xs-22 xl-top-2 xs-top-1" data-speed=".95">
 <a href="#" class="valor-times-link">
 <style>
-     
-        .image-container {
-            position: relative;
-            top: 250px;
-            right: 100px;
-            width: 660px;
-            height: 660px;
-            overflow: visible;
-            transition: transform 0.3s ease-in-out;
-        }
-
-         .image-container:hover {
-            transform: translateY(-10px);
-        }
-
-        .image-container img {
-            width: 770px; 
-            height: 500px;
-            position: relative;
-            top: 0;
-            left: 0;
-            object-fit: fill;
-            
-        }
-
-        .image-container svg {
-            position: absolute;
-            top: 50px;
-            left: 100px;
-            width: 750px;
-            height: 550px;
-        }
-    </style>
-
+    .image-container {
+        position: relative;
+        top: 250px;
+        right: 100px;
+        width: 660px;
+        height: 660px;
+        overflow: visible;
+        transition: transform 0.3s ease-in-out;
+    }
+    .image-container:hover {
+        transform: translateY(-10px);
+    }
+    .image-container img {
+        width: 770px; 
+        height: 500px;
+        position: relative;
+        top: 0;
+        left: 0;
+        object-fit: fill;
+    }
+    .image-container svg {
+        position: absolute;
+        top: 50px;
+        left: 100px;
+        width: 750px;
+        height: 550px;
+    }
+</style>
 <div class="image-container">
     <img src="images/MOJO.gif" alt="MOJO GIF">
     <svg viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -318,11 +401,9 @@
             overflow: visible;
             transition: transform 0.3s ease-in-out;
         }
-
-         .opositive-container:hover {
+        .opositive-container:hover {
             transform: translateY(-10px);
         }
-
         .opositive-container img {
             width: 770px; 
             height: 500px;
@@ -331,7 +412,6 @@
             top: 300px;
             right: 0.5px;
         }
-
         .opositive-container svg {
             position: absolute;
             top: 50px;
@@ -340,10 +420,8 @@
             height: 550px;
         }
     </style>
-
     <div class="opositive-container">
         <img src="images/COLUMN.png" alt="COLUMN Image">
-        
         <svg viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="imgMaskOpositive">
                 <path d="M0 20C0 8.95429 8.95431 0 20 0H640C651.046 0 660 8.95431 660 20V640C660 651.046 651.054 660 640.008 660C612.831 660 563.545 660 528 660C476.451 660 447.549 660 396 660C344.451 660 315.549 660 264 660C212.451 660 183.549 660 132 660C96.4552 660 47.169 660 19.9915 660C8.94585 660 0 651.046 0 640V20Z" fill="black"></path>
@@ -365,12 +443,10 @@
         height: 660px;
         overflow: visible;
         transition: transform 0.3s ease-in-out;
-        }
-
-         .valaclava-container:hover {
-            transform: translateY(-10px);
     }
-
+    .valaclava-container:hover {
+        transform: translateY(-10px);
+    }
     .valaclava-container img {
         width: 770px; 
         height: 500px;
@@ -379,7 +455,6 @@
         left: 0;
         object-fit: fill;
     }
-
     .valaclava-container svg {
         position: absolute;
         top: 50px;
@@ -388,10 +463,8 @@
         height: 550px;
     }
   </style>
-
   <div class="valaclava-container">
       <img src="images/EDITORIAL.png" alt="EDITORIAL Image">
-
       <svg viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="imgMaskValaclava">
               <path d="M0 20C0 8.95429 8.95431 0 20 0H640C651.046 0 660 8.95431 660 20V640C660 651.046 651.054 660 640.008 660C612.831 660 563.545 660 528 660C476.451 660 447.549 660 396 660C344.451 660 315.549 660 264 660C212.451 660 183.549 660 132 660C96.4552 660 47.169 660 19.9915 660C8.94585 660 0 651.046 0 640V20Z" fill="black"></path>
@@ -429,40 +502,22 @@
 </div>
 </div>
 <div class="boxes"><div class=" stack">
-<article class="box">
+<article class="box" onclick="document.getElementById('patterns-section').scrollIntoView({behavior: 'smooth'});">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>PAPER 1</h3>
 <h4 class="bs-60 upper">PATTERN</h4>
-<style>
-        .see-more {
-            color: inherit;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .see-more:hover {
-            text-decoration: underline;
-        }
-        .sparkle {
-            color: #ff66b2;
-        }
-        .patterns-section {
-            scroll-margin-top: 20px; /* Adjust this to account for fixed headers if needed */
-        }
-    </style>
-    <p style="font-family: sans-serif; line-height: 1.4; margin-bottom: 50px; cursor: pointer;">
-        Patterns of thought, framed—whether defining, dissecting, or describing, each paper traces a path...
-        <span class="see-more" onclick="document.getElementById('patterns-section').scrollIntoView({behavior: 'smooth'});">
-            see more <span class="sparkle">✨</span>
-        </span>
-    </p>
+<p style="font-family: sans-serif; line-height: 1.4; margin-bottom: 50px; cursor: pointer;">
+    Patterns of thought, framed—whether defining, dissecting, or describing, each paper traces a path...
+    <span class="see-more">see more <span class="sparkle">✨</span></span>
+</p>
 </article>
 </div><div class="b-end stack">
-<article class="box">
+<article class="box" onclick="document.getElementById('testimonials').scrollIntoView({behavior: 'smooth'});">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>PAPER 2</h3>
 <h4 class="bs-60 upper">CRITIQUE</h4>
 <p style="font-family: Roboto">We confront hard truths—dissecting societal, cultural, and political flaws to spark change and arm future generations with the courage to challenge them.</p>
 </article>
 </div><div class="b-middle stack">
-<article class="box">
+<article class="box" onclick="document.getElementById('assertionModal').classList.add('active'); document.body.classList.add('modal-open');">
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>PAPER 3</h3>
 <h4 class="bs-60 upper">ASSERTION</h4>
 <p style="font-family: Roboto">INC's political rallies test Church-State separation. While democratic, they risk constitutional integrity—demanding fair processes to protect democracy.</p>
@@ -498,24 +553,34 @@
  </header>
  <div class="client-wrap xl-top-2 xs-top-1">
  <div class="row xs-wrap" style="gap:20px"><div class="bs-x1-5 bs-xs-10">
- </div><div class="patterns" style="width: 20.833vw;">
+ </div>
+ <div class="patterns" style="width: 20.833vw;" onclick="showPatternModal(1)">
  <img src="images/PATTERN 1.png" alt="Pattern 1" style="object-fit: cover;">
- </div><div class="patterns" style="width: 20.833vw;">
+ </div>
+ <div class="patterns" style="width: 20.833vw;" onclick="showPatternModal(2)">
  <img src="images/PATTERN 2.png" alt="Pattern 2" style="object-fit: cover;">
- </div><div class="patterns" style="width: 20.833vw;">
+ </div>
+ <div class="patterns" style="width: 20.833vw;" onclick="showPatternModal(3)">
  <img src="images/PATTERN 3.png" alt="Pattern 3" style="object-fit: cover;">
- </div><div class="bs-xl-6 bs-xs-10" style="width: 20.833vw;">
+ </div>
+ <div class="bs-xl-6 bs-xs-10" style="width: 20.833vw;" onclick="showPatternModal(4)">
  <img src="images/PATTERN 4.png" alt="Pattern 4" style="object-fit: cover;">
- </div></div>
- <div class="row xs-wrap" style="gap:20px"><div class="patterns" style="width: 20.833vw;">
+ </div>
+ </div>
+ <div class="row xs-wrap" style="gap:20px">
+ <div class="patterns" style="width: 20.833vw;" onclick="showPatternModal(5)">
  <img src="images/PATTERN 5.png" alt="Pattern 5" style="object-fit: cover;">
- </div><div class="patterns" style="width: 20.833vw;">
+ </div>
+ <div class="patterns" style="width: 20.833vw;" onclick="showPatternModal(6)">
  <img src="images/PATTERN 6.png" alt="Pattern 6" style="object-fit: cover;">
- </div><div class="patterns" style="width: 20.833vw;">
+ </div>
+ <div class="patterns" style="width: 20.833vw;" onclick="showPatternModal(7)">
  <img src="images/PATTERN 7.png" alt="Pattern 7" style="object-fit: cover;">
- </div><div class="bs-xl-6 bs-xs-10" style="width: 20.833vw;">
+ </div>
+ <div class="bs-xl-6 bs-xs-10" style="width: 20.833vw;" onclick="showPatternModal(8)">
  <img src="images/PATTERN 8.png" alt="Pattern 8" style="object-fit: cover;">
- </div></div>
+ </div>
+ </div>
 <div class="client-stat">
 <div class="stat-bg"></div>
 <div class="stat-inner">
@@ -535,367 +600,100 @@
 <section id="awards" class="grid-inner xs-top-4">
 <div class="awards-scroll">
 <span>a</span><span>w</span><span>a</span><span>r</span><span>d</span><span>s</span>
-
-<style>
- /* Fixed hover effect */
- #awards .frame {
-     cursor: pointer;
-     position: relative;
-     display: inline-block;
-     overflow: hidden;
-     vertical-align: middle;
- }
- 
- #awards .award-image {
-     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-     transform-origin: center;
-     width: 100%;
-     height: auto;
- }
- 
- #awards .award-image:hover {
-     transform: scale(1.25);
-     z-index: 100;
- }
- 
- /* Remove conflicting frame transition */
- #awards .frame {
-     transition: none !important;
- }
- 
- /* Modal overlay (keep existing) */
- .image-modal {
-     display: none;
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     background: rgba(0, 0, 0, 0.9);
-     z-index: 1000;
-     justify-content: center;
-     align-items: center;
-     opacity: 0;
-     transition: opacity 0.3s ease;
- }
- 
- .image-modal.active {
-     display: flex;
-     opacity: 1;
- }
- 
- .modal-content {
-     max-width: 90%;
-     max-height: 90%;
-     object-fit: contain;
-     transform: scale(0.95);
-     transition: transform 0.3s ease;
- }
- 
- .image-modal.active .modal-content {
-     transform: scale(1);
- }
- 
- .close-modal {
-     position: absolute;
-     top: 25px;
-     right: 35px;
-     color: white;
-     font-size: 40px;
-     font-weight: bold;
-     cursor: pointer;
-     transition: opacity 0.3s ease;
- }
- 
- .close-modal:hover {
-     opacity: 0.8;
- }
- 
- /* Content modal styles */
- .content-modal {
-     display: none;
-     position: fixed;
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%, -50%);
-     width: 80%;
-     max-width: 800px;
-     max-height: 80vh;
-     background: #1D2145;
-     border: 1px solid #EEEEF2;
-     padding: 40px;
-     z-index: 1000;
-     box-shadow: 0 0 20px rgba(0,0,0,0.5);
-     overflow-y: auto;
- }
- 
- .content-modal.active {
-     display: block;
- }
- 
- .content-modal h3 {
-     font-size: 2rem;
-     margin-bottom: 20px;
-     color: #EEEEF2;
- }
- 
- .content-modal p {
-     font-size: 1.1rem;
-     line-height: 1.6;
-     color: #EEEEF2;
-     margin-bottom: 20px;
-     font-family: 'Roboto', sans-serif;
- }
- 
- .content-modal .close-content {
-     position: absolute;
-     top: 15px;
-     right: 15px;
-     color: #EEEEF2;
-     font-size: 30px;
-     cursor: pointer;
- }
- 
- /* Circle logo styles */
- .circle-logo {
-     width: 60px;
-     height: 60px;
-     border-radius: 50%;
-     background: #EEEEF2;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     cursor: pointer;
-     margin: 0 auto;
-     transition: transform 0.3s ease;
- }
- 
- .circle-logo:hover {
-     transform: scale(1.1);
- }
- 
- .circle-logo img {
-     width: 80%;
-     height: 80%;
-     object-fit: contain;
- }
- </style>
- 
- <figure class="frame bs-xl-3 bs-xl-os-3">
+</div>
+<figure class="frame bs-xl-3 bs-xl-os-3" onclick="showAwardModal('images/7.png')">
     <img class="lazy award-image" src="images/7.png" data-src="images/7.png" alt="Award">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-12">
-    <img class="award-image" 
-         src="images/8.png" 
-         data-src="images/8.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-12" onclick="showAwardModal('images/8.png')">
+    <img class="award-image" src="images/8.png" data-src="images/8.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/9.png" 
-         data-src="images/9.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/9.png')">
+    <img class="award-image" src="images/9.png" data-src="images/9.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/10.png" 
-         data-src="images/10.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-10" onclick="showAwardModal('images/10.png')">
+    <img class="award-image" src="images/10.png" data-src="images/10.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/11.png" 
-         data-src="images/11.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/11.png')">
+    <img class="award-image" src="images/11.png" data-src="images/11.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/12.png" 
-         data-src="images/12.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/12.png')">
+    <img class="award-image" src="images/12.png" data-src="images/12.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/13.png" 
-         data-src="images/13.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/13.png')">
+    <img class="award-image" src="images/13.png" data-src="images/13.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-12">
-    <img class="award-image" 
-         src="images/14.png" 
-         data-src="images/14.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-12" onclick="showAwardModal('images/14.png')">
+    <img class="award-image" src="images/14.png" data-src="images/14.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/15.png" 
-         data-src="images/15.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/15.png')">
+    <img class="award-image" src="images/15.png" data-src="images/15.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/16.png" 
-         data-src="images/16.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-10" onclick="showAwardModal('images/16.png')">
+    <img class="award-image" src="images/16.png" data-src="images/16.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/17.png" 
-         data-src="images/17.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/17.png')">
+    <img class="award-image" src="images/17.png" data-src="images/17.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/18.png" 
-         data-src="images/18.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/18.png')">
+    <img class="award-image" src="images/18.png" data-src="images/18.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/19.png" 
-         data-src="images/19.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/19.png')">
+    <img class="award-image" src="images/19.png" data-src="images/19.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/20.png" 
-         data-src="images/20.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-10" onclick="showAwardModal('images/20.png')">
+    <img class="award-image" src="images/20.png" data-src="images/20.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/21.png" 
-         data-src="images/21.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/21.png')">
+    <img class="award-image" src="images/21.png" data-src="images/21.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/22.png" 
-         data-src="images/22.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/22.png')">
+    <img class="award-image" src="images/22.png" data-src="images/22.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/23.png" 
-         data-src="images/23.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/23.png')">
+    <img class="award-image" src="images/23.png" data-src="images/23.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-12">
-    <img class="award-image" 
-         src="images/24.png" 
-         data-src="images/24.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-12" onclick="showAwardModal('images/24.png')">
+    <img class="award-image" src="images/24.png" data-src="images/24.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/25.png" 
-         data-src="images/25.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/25.png')">
+    <img class="award-image" src="images/25.png" data-src="images/25.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/26.png" 
-         data-src="images/26.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-10" onclick="showAwardModal('images/26.png')">
+    <img class="award-image" src="images/26.png" data-src="images/26.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/27.png" 
-         data-src="images/27.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/27.png')">
+    <img class="award-image" src="images/27.png" data-src="images/27.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/28.png" 
-         data-src="images/28.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/28.png')">
+    <img class="award-image" src="images/28.png" data-src="images/28.png" alt="Award Certificate">
 </figure>
-
-<figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/29.png" 
-         data-src="images/29.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/29.png')">
+    <img class="award-image" src="images/29.png" data-src="images/29.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/30.png" 
-         data-src="images/30.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-10" onclick="showAwardModal('images/30.png')">
+    <img class="award-image" src="images/30.png" data-src="images/30.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/31.png" 
-         data-src="images/31.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/31.png')">
+    <img class="award-image" src="images/31.png" data-src="images/31.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/32.png" 
-         data-src="images/32.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/32.png')">
+    <img class="award-image" src="images/32.png" data-src="images/32.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/33.png" 
-         data-src="images/33.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/33.png')">
+    <img class="award-image" src="images/33.png" data-src="images/33.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-12">
-    <img class="award-image" 
-         src="images/34.png" 
-         data-src="images/34.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-12" onclick="showAwardModal('images/34.png')">
+    <img class="award-image" src="images/34.png" data-src="images/34.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/35.png" 
-         data-src="images/35.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-6" onclick="showAwardModal('images/35.png')">
+    <img class="award-image" src="images/35.png" data-src="images/35.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/36.png" 
-         data-src="images/36.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-10" onclick="showAwardModal('images/36.png')">
+    <img class="award-image" src="images/36.png" data-src="images/36.png" alt="Award Certificate">
 </figure>
-
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/37.png" 
-         data-src="images/37.png" 
-         alt="Award Certificate">
+<figure class="frame bs-xl-3 bs-xl-os-11" onclick="showAwardModal('images/37.png')">
+    <img class="award-image" src="images/37.png" data-src="images/37.png" alt="Award Certificate">
 </figure>
-
-</div>
 <div class="awards-content">
 <div class="line-anim">
 <svg width="11" height="9" xmlns="http://www.w3.org/2000/svg">
@@ -908,13 +706,13 @@
 </div>
 <h3 class="section-title"><i class="circle-tag"></i><i class="circle-tag"></i>Latest award</h3>
 <div class="bs-grid xs-wrap grid-middle">
-<div class="bs-xl-6 bs-xs-22 xs-top-1"><a class="circle-link view recommended-papers-link" href="#"><h4 class="cl-inner bs-120 upper">Recommended Papers<div class="circle-icon"><i></i><span><img src="images/arrow-hex.svg" alt="arrow icon with hexagon tip"><img src="images/arrow-hex.svg" alt="arrow icon with hexagon tip"></span></div></h4></a></div>
+<div class="bs-xl-6 bs-xs-22 xs-top-1"><a class="circle-link view" href="#" onclick="document.getElementById('recommendedPapersModal').classList.add('active'); document.body.classList.add('modal-open'); return false;"><h4 class="cl-inner bs-120 upper">Recommended Papers<div class="circle-icon"><i></i><span><img src="images/arrow-hex.svg" alt="arrow icon with hexagon tip"><img src="images/arrow-hex.svg" alt="arrow icon with hexagon tip"></span></div></h4></a></div>
 <div class="bs-xl-10 bs-xl-os-2 bs-xs-20 bs-xs-os-0">
 <div class="award-icons view" style="display: flex; justify-content: center; align-items: center; position: relative;">
-    <div class="circle-logo" id="circleLogo">
+    <div class="circle-logo" onclick="document.getElementById('circleLogoModal').classList.add('active'); document.body.classList.add('modal-open');">
         <img src="images/fwa.svg" alt="The FWA">
     </div>
-    <span class="bs-tech">x 3</span>
+    <span class="bs-tech">(Awarded 3 times)</span>
 </div>
 </div>
 </div>
@@ -1102,34 +900,34 @@
 
 <!-- Content Modals -->
 <div class="content-modal" id="workSpaceModal">
-    <span class="close-content">&times;</span>
+    <span class="close-content" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
     <h3>WORK SPACE</h3>
     <p>This is the work space content area where you can showcase your latest projects, ideas, and creative works. You can add text, images, videos, or any other content here to display your portfolio items.</p>
     <p>The modal provides a focused view of your work while maintaining the aesthetic of your website with the same color scheme and design elements.</p>
 </div>
 
 <div class="content-modal" id="valorTimesModal">
-    <span class="close-content">&times;</span>
+    <span class="close-content" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
     <h3>VALOR TIMES</h3>
     <p>Welcome to VALOR TIMES - your source for the latest news, articles, and insights from the Valor Web Studio team.</p>
     <p>Here you'll find our editorial content, thought pieces, and updates on our projects. This space serves as a platform for sharing our perspectives on design, technology, and the creative process.</p>
 </div>
 
 <div class="content-modal" id="viewAllWorkModal">
-    <span class="close-content">&times;</span>
+    <span class="close-content" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
     <h3>ALL WORK</h3>
     <p>This is the comprehensive view of all our projects and works. Browse through our complete portfolio to see the range of our capabilities and the diversity of our creative output.</p>
     <p>Each project represents our commitment to excellence in design and development, showcasing our ability to deliver innovative solutions across various industries and platforms.</p>
 </div>
 
 <div class="content-modal" id="testimonialModal">
-    <span class="close-content">&times;</span>
+    <span class="close-content" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
     <h3 id="testimonialTitle">TESTIMONIAL</h3>
     <div id="testimonialContent"></div>
 </div>
 
 <div class="content-modal" id="recommendedPapersModal">
-    <span class="close-content">&times;</span>
+    <span class="close-content" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
     <h3>RECOMMENDED PAPERS</h3>
     <p>Here are our recommended readings and papers that have influenced our work and philosophy:</p>
     <ul>
@@ -1141,26 +939,41 @@
 </div>
 
 <div class="content-modal" id="circleLogoModal">
-    <span class="close-content">&times;</span>
+    <span class="close-content" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
     <h3>THE FWA AWARDS</h3>
     <p>We're proud to have received multiple FWA (Favourite Website Awards) recognitions for our innovative web design work.</p>
     <p>The FWA is recognized as the ultimate award for cutting-edge innovation on the web, recognizing projects that push the boundaries of creativity and technology.</p>
 </div>
 
 <div class="content-modal" id="assertionModal">
-    <span class="close-content">&times;</span>
+    <span class="close-content" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
     <h3>ASSERTION</h3>
     <p style="font-family: 'Roboto', sans-serif; line-height: 1.6;">
         Historically, religion has played a significant role in the country's culture and politics, with groups such as Iglesia ni Cristo (INC) wielding considerable influence. The INC's recent nationwide rally opposing Vice President Sara Duterte's impeachment raises concerns regarding the separation of Church and State. ACLED (2021) specifies that regulating protests was essential to balance freedom of expression with maintaining public order and promoting the INC's involvement in political matters as a form of democratic engagement. While INC's actions align with democratic rights, these compromise the due process of law and constitutional integrity, as stated in Article 2, Section 6 of the 1987 Constitution. The impeachment process must remain consistent, impartial, and evidence-based to protect democracy and prevent misuse as a political instrument. These contrasting perspectives emphasize the need for accountability, fairness, and respect for constitutional principles when addressing the complexities of impeachment.
     </p>
 </div>
 
-<!-- scripts --><script>window.ASSETS = ["https://images.prismic.io/buzzworthy/Zh_9YPPdc1huKlPk_ssi-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9X_Pdc1huKlPj_op-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9YfPdc1huKlPl_va-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XPPdc1huKlPg_hy-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XvPdc1huKlPi_oa-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9WvPdc1huKlPb_be-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9W_Pdc1huKlPd_hp-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9WvPdc1huKlPc_ho-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XfPdc1huKlPh_md-mood.jpg?auto=format,compress"]
-</script><script>window.SLIDETITLE = ["<a href='../work/sling-shot' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Sling Shot<\/a>","<a href='../work/opositive' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>O Positive<\/a>","<a href='../work/valaclava' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Valaclava<\/a>","<a href='../work/hoboken-yogi' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Hoboken Yogi<\/a>","<a href='../work/ocean-agency' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Ocean Agency<\/a>","<a href='../work/beemok' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>The BHC<\/a>","<a href='../work/hudson-properties' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Hudson Prop.<\/a>","<a href='../work/helias' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Helias Oils<\/a>","<a href='../work/modern-md' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Modern MD<\/a>"]
-</script><script>window.SLIDESERVICE = ["<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Development<\/li><li>Shopify<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>Marketing<\/li>","<li>Website Design<\/li><li>Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>Shopify<\/li>","<li>Website Design<\/li><li>Development<\/li><li>Marketing<\/li><li>SEO<\/li>"]
-</script><!-- <script src="../dist/js/app.min.js"></script>
-<script src="../dist/js/gsap.min.js"></script>
-<script src="../dist/js/gsap-bundle.min.js"></script> -->
+<!-- Image Modal -->
+<div class="image-modal" id="imageModal">
+    <span class="close-modal" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
+    <img class="modal-content" id="modalImage" alt="Enlarged view">
+</div>
+
+<!-- Pattern Modal -->
+<div class="content-modal pattern-modal" id="patternModal">
+    <span class="close-content" onclick="this.parentElement.classList.remove('active'); document.body.classList.remove('modal-open');">&times;</span>
+    <img id="patternImage" alt="Pattern">
+    <h3 id="patternTitle">PATTERN</h3>
+    <p id="patternDescription">Detailed description of this pattern goes here.</p>
+</div>
+
+<!-- scripts -->
+<script>window.ASSETS = ["https://images.prismic.io/buzzworthy/Zh_9YPPdc1huKlPk_ssi-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9X_Pdc1huKlPj_op-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9YfPdc1huKlPl_va-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XPPdc1huKlPg_hy-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XvPdc1huKlPi_oa-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9WvPdc1huKlPb_be-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9W_Pdc1huKlPd_hp-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9WvPdc1huKlPc_ho-mood.jpg?auto=format,compress","https://images.prismic.io/buzzworthy/Zh_9XfPdc1huKlPh_md-mood.jpg?auto=format,compress"]
+</script>
+<script>window.SLIDETITLE = ["<a href='../work/sling-shot' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Sling Shot<\/a>","<a href='../work/opositive' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>O Positive<\/a>","<a href='../work/valaclava' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Valaclava<\/a>","<a href='../work/hoboken-yogi' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Hoboken Yogi<\/a>","<a href='../work/ocean-agency' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Ocean Agency<\/a>","<a href='../work/beemok' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>The BHC<\/a>","<a href='../work/hudson-properties' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Hudson Prop.<\/a>","<a href='../work/helias' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Helias Oils<\/a>","<a href='../work/modern-md' class='circle-link'><div class='circle-icon'><i><\/i><span><img src='../img/svg/arrow-hex.svg' alt='arrow icon with hexagon tip'><img src='../img/svg/arrow-hex.svg'><\/span><\/div>Modern MD<\/a>"]
+</script>
+<script>window.SLIDESERVICE = ["<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Development<\/li><li>Shopify<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>Marketing<\/li>","<li>Website Design<\/li><li>Development<\/li><li>SEO<\/li>","<li>Website Design<\/li><li>Animations<\/li>","<li>Website Design<\/li><li>Animations<\/li><li>Creative Development<\/li><li>Shopify<\/li>","<li>Website Design<\/li><li>Development<\/li><li>Marketing<\/li><li>SEO<\/li>"]
+</script>
 <script src="js/app.min.min.js"></script>
 <script src="js/three.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/shaderUtils.js"></script>
@@ -1173,6 +986,30 @@
 <script src="js/main.js"></script>
 
 <script>
+// Function to show award modal
+function showAwardModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    modal.classList.add('active');
+    modalImg.src = imageSrc;
+    document.body.classList.add('modal-open');
+}
+
+// Function to show pattern modal
+function showPatternModal(patternNumber) {
+    const modal = document.getElementById('patternModal');
+    const patternImg = document.getElementById('patternImage');
+    const patternTitle = document.getElementById('patternTitle');
+    const patternDesc = document.getElementById('patternDescription');
+    
+    patternImg.src = `images/PATTERN ${patternNumber}.png`;
+    patternTitle.textContent = `PATTERN ${patternNumber}`;
+    patternDesc.textContent = `Detailed description of Pattern ${patternNumber} goes here.`;
+    
+    modal.classList.add('active');
+    document.body.classList.add('modal-open');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Work Space Modal
     const workSpaceLink = document.getElementById('workSpaceLink');
@@ -1227,107 +1064,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Recommended Papers Modal
-    const recommendedPapersLink = document.querySelector('.recommended-papers-link');
-    const recommendedPapersModal = document.getElementById('recommendedPapersModal');
-    
-    recommendedPapersLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        recommendedPapersModal.classList.add('active');
-        document.body.classList.add('modal-open');
-    });
-
-    // Circle Logo Modal
-    const circleLogo = document.getElementById('circleLogo');
-    const circleLogoModal = document.getElementById('circleLogoModal');
-    
-    circleLogo.addEventListener('click', (e) => {
-        e.preventDefault();
-        circleLogoModal.classList.add('active');
-        document.body.classList.add('modal-open');
-    });
-
-    // Assertion Modal
-    const assertionBox = document.querySelector('.box:nth-child(3)');
-    const assertionModal = document.getElementById('assertionModal');
-    
-    assertionBox.addEventListener('click', (e) => {
-        e.preventDefault();
-        assertionModal.classList.add('active');
-        document.body.classList.add('modal-open');
-    });
-
-    // Close modals
-    const closeButtons = document.querySelectorAll('.close-content, .close-modal');
-    
-    closeButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelectorAll('.content-modal, .image-modal').forEach(modal => {
-                modal.classList.remove('active');
-            });
-            document.body.classList.remove('modal-open');
-        });
-    });
-
-    // Close modal when clicking outside
-    window.addEventListener('click', (e) => {
+    // Close modals when clicking outside content
+    document.addEventListener('click', (e) => {
         if (e.target.classList.contains('content-modal') || e.target.classList.contains('image-modal')) {
-            document.querySelectorAll('.content-modal, .image-modal').forEach(modal => {
+            document.querySelectorAll('.content-modal.active, .image-modal.active').forEach(modal => {
                 modal.classList.remove('active');
+                document.body.classList.remove('modal-open');
             });
-            document.body.classList.remove('modal-open');
         }
-    });
-
-    // Image Modal
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const closeBtn = document.querySelector('.close-modal');
-
-    document.querySelectorAll('#awards .frame img').forEach(img => {
-        img.addEventListener('click', (e) => {
-            modal.classList.add('active');
-            modalImg.src = e.target.src;
-            document.body.classList.add('modal-open');
-        });
-    });
-
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-        document.body.classList.remove('modal-open');
-    });
-
-    // Scroll to Patterns section from "see more" link
-    document.querySelector('.see-more').addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('patterns-section').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // Scroll to Testimonials from Critique box
-    document.querySelector('.box:nth-child(2)').addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' });
-    });
-});
-
-// Add body class when modal is open to prevent scrolling
-document.addEventListener('DOMContentLoaded', () => {
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'class') {
-                if (document.body.classList.contains('modal-open')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
-            }
-        });
-    });
-
-    observer.observe(document.body, {
-        attributes: true
     });
 });
 </script>
-</body></html>
+</body>
+</html>

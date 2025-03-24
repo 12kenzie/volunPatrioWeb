@@ -1125,27 +1125,38 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
         function showArticle(articleNumber, event) {
     if (event) {
-        event.preventDefault(); // Stop the page from jumping to the top
-        event.stopPropagation(); // Prevent any parent events from triggering
+        event.preventDefault(); // Stops default behavior (like jumping to top)
+        event.stopPropagation(); // Prevents interference from other scripts
     }
 
     let title = `Article ${articleNumber}`;
     let author = `Author ${articleNumber}`;
-    let content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    let content = "Lorem ipsum dolor sit amet..."; // Sample text
 
     document.getElementById('articleTitle').innerText = title;
     document.getElementById('articleAuthor').innerText = author;
     document.getElementById('articleContent').innerText = content;
 
+    // Show overlay & article display
     document.getElementById('articleOverlay').style.display = 'block';
     document.getElementById('articleDisplay').style.display = 'block';
-
-    return false; // Stops any default action
 }
 
-        function closeArticle() {
-            document.getElementById('articleOverlay').style.display = 'none';
-            document.getElementById('articleDisplay').style.display = 'none';
-        }
+// Close article when clicking outside it
+document.getElementById('articleOverlay').addEventListener('click', function () {
+    closeArticle();
+});
+
+function closeArticle() {
+    document.getElementById('articleOverlay').style.display = 'none';
+    document.getElementById('articleDisplay').style.display = 'none';
+}
+
+// Prevent "Press Button" from redirecting
+document.querySelectorAll('.press-button').forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevents going to another page
+    });
+});
     </script>
 </body></html>

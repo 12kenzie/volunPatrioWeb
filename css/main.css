@@ -110,6 +110,18 @@
             text-align: justify;
         }
 
+#articleOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    backdrop-filter: blur(10px); /* Optional blur effect */
+    z-index: 999; /* Covers everything */
+}
+
 body {
   font-family: 'League Spartan';
   font-size: 22px;

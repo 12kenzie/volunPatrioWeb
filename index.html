@@ -436,7 +436,7 @@
     transition: none !important;
 }
 
-/* Modal overlay (keep existing) */
+/* Modal overlay */
 .image-modal {
     display: none;
     position: fixed;
@@ -484,7 +484,8 @@
     opacity: 0.8;
 }
 </style>
-<figure class="frame bs-xl-3 bs-xl-os-3">
+<div id="awards">
+ <figure class="frame bs-xl-3 bs-xl-os-3">
     <img class="lazy award-image" src="images/7.png" data-src="images/7.png" alt="Award">
 </figure>
 
@@ -697,7 +698,7 @@
          data-src="images/37.png" 
          alt="Award Certificate">
 </figure>
- 
+ </div>
 </div>
 <div class="awards-content">
 <div class="line-anim">
@@ -945,15 +946,18 @@
     <span class="close-modal">&times;</span>
     <img class="modal-content" id="modalImage">
 </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.close-modal');
     
-    // Image click handler
+    // Image click handler - MODIFIED WITH FIX
     document.querySelectorAll('#awards .frame img').forEach(img => {
         img.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            e.preventDefault();  // Prevent default action
             modal.classList.add('active');
             modalImg.src = e.target.src;
             document.body.classList.remove('typing');

@@ -1203,4 +1203,58 @@ ScrollTrigger.create({
     }
 });
 </script>
+     <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced scroll function that goes PAST the awards animation
+    function scrollToAssertionPapers() {
+        // Find the actual Assertion Papers heading (not just the awards container)
+        const assertionHeading = document.querySelector('#awards .section-title');
+        if (!assertionHeading) return;
+        
+        // Calculate position PAST the hexagon animation
+        const awardsSection = document.getElementById('awards');
+        const hexagonHeight = awardsSection.querySelector('.hex-wrap').offsetHeight;
+        const targetPos = assertionHeading.getBoundingClientRect().top + window.pageYOffset - hexagonHeight - 100;
+        
+        // Smooth scroll with momentum
+        const startPos = window.pageYOffset;
+        const distance = targetPos - startPos;
+        const duration = Math.min(1000, 300 + Math.abs(distance)/3);
+        
+        let startTime = null;
+        
+        function animation(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed/duration, 1);
+            
+            // Ease-out cubic
+            const ease = 1 - Math.pow(1 - progress, 3);
+            
+            window.scrollTo(0, startPos + distance * ease);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animation);
+            }
+        }
+        
+        requestAnimationFrame(animation);
+    }
+
+    // Only modify the ASSERTION box
+    document.querySelectorAll('.box').forEach(box => {
+        if (box.querySelector('h4').textContent.trim() === 'ASSERTION') {
+            box.style.cursor = 'pointer';
+            box.addEventListener('click', scrollToAssertionPapers);
+        }
+    });
+});
+</script>
+     <style>#awards {
+    scroll-snap-type: y proximity;
+}
+#awards .awards-content {
+    scroll-snap-align: start;
+    padding-top: 120px; /* Ensure space after hexagon */
+}</style>
 </body></html>

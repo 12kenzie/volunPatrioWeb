@@ -1034,51 +1034,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-   <script>
+  <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Custom smooth scroll with animation protection
-    function gentleScroll(target) {
-        const element = typeof target === 'string' 
-            ? document.querySelector(target) 
-            : target;
-        
+    // Custom smooth scroll that targets exact sections
+    function scrollToSection(target) {
+        const element = document.querySelector(target);
         if (!element) return;
 
-        // Temporarily disable scroll triggers
-        document.body.classList.add('smooth-scrolling');
-        
+        // Temporarily disable GSAP/ScrollMagic triggers
+        const scrollTriggers = document.querySelectorAll('[data-scroll]');
+        scrollTriggers.forEach(trigger => {
+            trigger.style.pointerEvents = 'none';
+        });
+
         const startPos = window.pageYOffset;
         const targetPos = element.getBoundingClientRect().top + startPos - 100; // 100px offset
-        const duration = 800; // Optimal duration for animation sync
+        const duration = 1000; // Matches site's animation timing
 
         const startTime = performance.now();
 
-        function scrollStep(timestamp) {
+        function animateScroll(timestamp) {
             const elapsed = timestamp - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Cubic ease-out
-            const ease = 1 - Math.pow(1 - progress, 3);
+            // Ease-out quint for smooth deceleration
+            const ease = 1 - Math.pow(1 - progress, 5);
             
             window.scrollTo(0, startPos + (targetPos - startPos) * ease);
             
             if (progress < 1) {
-                requestAnimationFrame(scrollStep);
+                requestAnimationFrame(animateScroll);
             } else {
-                // Re-enable animations after scroll completes
-                setTimeout(() => {
-                    document.body.classList.remove('smooth-scrolling');
-                }, 300);
+                // Re-enable animations
+                scrollTriggers.forEach(trigger => {
+                    trigger.style.pointerEvents = '';
+                });
             }
         }
 
-        requestAnimationFrame(scrollStep);
+        requestAnimationFrame(animateScroll);
     }
 
     // PATTERN box -> EYE-OPENING section
     document.querySelector('.see-more')?.addEventListener('click', function(e) {
         e.preventDefault();
-        gentleScroll('#clients h3');
+        scrollToSection('#clients h3');
     });
 
     // CRITIQUE box -> TESTIMONIALS section
@@ -1087,19 +1087,19 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (boxType === 'CRITIQUE') {
             box.style.cursor = 'pointer';
-            box.addEventListener('click', () => gentleScroll('#testimonials'));
+            box.addEventListener('click', () => scrollToSection('#testimonials'));
         }
         
         if (boxType === 'ASSERTION') {
             box.style.cursor = 'pointer';
             box.addEventListener('click', () => {
-                // Scroll to the Assertion Papers circle link
-                gentleScroll('a[href*="slingshot"]'); 
+                // Exact target for Assertion Papers
+                scrollToSection('a.circle-link.view[href*="slingshot"]');
             });
         }
     });
 
-    // Image modal (unchanged)
+    // Image modal (existing functionality)
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.close-modal');
@@ -1119,22 +1119,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') modal.classList.remove('active');
     });
-
-    // Add required styles
-    const style = document.createElement('style');
-    style.textContent = `
-        .smooth-scrolling {
-            pointer-events: none;
-        }
-        .smooth-scrolling [data-scroll] {
-            animation-play-state: paused !important;
-            transition: none !important;
-        }
-        #imageModal.active {
-            z-index: 1000;
-        }
-    `;
-    document.head.appendChild(style);
 });
 </script>
 </body></html>

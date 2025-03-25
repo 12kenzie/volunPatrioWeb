@@ -1034,50 +1034,67 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-     <script>
+    <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle PATTERN box "see more" click (scrolls to EYE-OPENING section)
-    const seeMoreLink = document.querySelector('.see-more');
-    if (seeMoreLink) {
-        seeMoreLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('#clients h3').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
+    // Custom smooth scroll that doesn't interfere with animations
+    function gentleScroll(target) {
+        const element = typeof target === 'string' ? document.querySelector(target) : target;
+        if (!element) return;
+
+        // Get current scroll position
+        const startPos = window.pageYOffset;
+        const targetPos = element.getBoundingClientRect().top + startPos;
+        const distance = targetPos - startPos;
+        const duration = Math.min(1000, Math.max(500, Math.abs(distance) * 0.5));
+        let startTime = null;
+
+        function scrollStep(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = timestamp - startTime;
+            const percent = Math.min(progress / duration, 1);
+            
+            // Ease in-out function
+            const ease = percent < 0.5 
+                ? 2 * percent * percent 
+                : 1 - Math.pow(-2 * percent + 2, 2) / 2;
+
+            window.scrollTo(0, startPos + distance * ease);
+            
+            if (progress < duration) {
+                window.requestAnimationFrame(scrollStep);
+            }
+        }
+
+        window.requestAnimationFrame(scrollStep);
     }
 
-    // Make CRITIQUE and ASSERTION boxes clickable
-    const boxes = document.querySelectorAll('.box');
-    
-    boxes.forEach(box => {
+    // Handle PATTERN box "see more" click
+    document.querySelector('.see-more')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        gentleScroll('#clients h3');
+    });
+
+    // Make boxes clickable with careful timing
+    document.querySelectorAll('.box').forEach(box => {
         const boxType = box.querySelector('h4').textContent.trim();
-        
-        // Skip if it's the PATTERN box (already handled above)
         if (boxType === 'PATTERN') return;
-        
-        // Make the whole box clickable (except the "see more" link)
+
         box.style.cursor = 'pointer';
         box.addEventListener('click', function(e) {
-            // Don't trigger if clicking on the "see more" link
             if (e.target.closest('.see-more')) return;
-            
-            if (boxType === 'CRITIQUE') {
-                // Scroll to testimonials
-                document.getElementById('testimonials').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            } 
-            else if (boxType === 'ASSERTION') {
-                // Scroll to assertions papers (the circle-link with "Assertion Papers")
-                document.querySelector('.circle-link.view').scrollIntoView({
-                    behavior: 'smooth'
-                });
+
+            switch(boxType) {
+                case 'CRITIQUE':
+                    gentleScroll('#testimonials');
+                    break;
+                case 'ASSERTION':
+                    gentleScroll('.circle-link.view');
+                    break;
             }
         });
     });
 
-    // Existing image modal code (unchanged)
+    // Improved image modal that pauses animations during view
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.close-modal');
@@ -1086,28 +1103,46 @@ document.addEventListener('DOMContentLoaded', function() {
         img.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
+            
+            // Pause any running animations
+            document.body.classList.add('modal-open');
+            
             modal.classList.add('active');
             modalImg.src = this.src;
-            document.body.classList.remove('typing');
             return false;
         });
     });
 
-    closeBtn.addEventListener('click', function() {
+    function closeModal() {
+        document.body.classList.remove('modal-open');
         modal.classList.remove('active');
-    });
+    }
 
+    closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
+        if (e.target === modal) closeModal();
     });
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            modal.classList.remove('active');
-        }
+        if (e.key === 'Escape') closeModal();
     });
+
+    // Add this CSS via JavaScript to ensure smooth transitions
+    const style = document.createElement('style');
+    style.textContent = `
+        .modal-open {
+            pointer-events: none;
+        }
+        .modal-open * {
+            animation-play-state: paused !important;
+            transition: none !important;
+        }
+        #imageModal.active ~ * {
+            filter: blur(2px);
+            transition: filter 0.3s ease;
+        }
+    `;
+    document.head.appendChild(style);
 });
 </script>
 </body></html>

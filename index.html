@@ -1034,4 +1034,80 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+     <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle PATTERN box "see more" click (scrolls to EYE-OPENING section)
+    const seeMoreLink = document.querySelector('.see-more');
+    if (seeMoreLink) {
+        seeMoreLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#clients h3').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Make CRITIQUE and ASSERTION boxes clickable
+    const boxes = document.querySelectorAll('.box');
+    
+    boxes.forEach(box => {
+        const boxType = box.querySelector('h4').textContent.trim();
+        
+        // Skip if it's the PATTERN box (already handled above)
+        if (boxType === 'PATTERN') return;
+        
+        // Make the whole box clickable (except the "see more" link)
+        box.style.cursor = 'pointer';
+        box.addEventListener('click', function(e) {
+            // Don't trigger if clicking on the "see more" link
+            if (e.target.closest('.see-more')) return;
+            
+            if (boxType === 'CRITIQUE') {
+                // Scroll to testimonials
+                document.getElementById('testimonials').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            } 
+            else if (boxType === 'ASSERTION') {
+                // Scroll to assertions papers (the circle-link with "Assertion Papers")
+                document.querySelector('.circle-link.view').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Existing image modal code (unchanged)
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close-modal');
+
+    document.querySelectorAll('.frame img').forEach(img => {
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            modal.classList.add('active');
+            modalImg.src = this.src;
+            document.body.classList.remove('typing');
+            return false;
+        });
+    });
+
+    closeBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            modal.classList.remove('active');
+        }
+    });
+});
+</script>
 </body></html>

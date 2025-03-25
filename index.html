@@ -1034,67 +1034,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-    <script>
+   <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Custom smooth scroll that doesn't interfere with animations
+    // Custom smooth scroll with animation protection
     function gentleScroll(target) {
-        const element = typeof target === 'string' ? document.querySelector(target) : target;
+        const element = typeof target === 'string' 
+            ? document.querySelector(target) 
+            : target;
+        
         if (!element) return;
 
-        // Get current scroll position
+        // Temporarily disable scroll triggers
+        document.body.classList.add('smooth-scrolling');
+        
         const startPos = window.pageYOffset;
-        const targetPos = element.getBoundingClientRect().top + startPos;
-        const distance = targetPos - startPos;
-        const duration = Math.min(1000, Math.max(500, Math.abs(distance) * 0.5));
-        let startTime = null;
+        const targetPos = element.getBoundingClientRect().top + startPos - 100; // 100px offset
+        const duration = 800; // Optimal duration for animation sync
+
+        const startTime = performance.now();
 
         function scrollStep(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const progress = timestamp - startTime;
-            const percent = Math.min(progress / duration, 1);
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / duration, 1);
             
-            // Ease in-out function
-            const ease = percent < 0.5 
-                ? 2 * percent * percent 
-                : 1 - Math.pow(-2 * percent + 2, 2) / 2;
-
-            window.scrollTo(0, startPos + distance * ease);
+            // Cubic ease-out
+            const ease = 1 - Math.pow(1 - progress, 3);
             
-            if (progress < duration) {
-                window.requestAnimationFrame(scrollStep);
+            window.scrollTo(0, startPos + (targetPos - startPos) * ease);
+            
+            if (progress < 1) {
+                requestAnimationFrame(scrollStep);
+            } else {
+                // Re-enable animations after scroll completes
+                setTimeout(() => {
+                    document.body.classList.remove('smooth-scrolling');
+                }, 300);
             }
         }
 
-        window.requestAnimationFrame(scrollStep);
+        requestAnimationFrame(scrollStep);
     }
 
-    // Handle PATTERN box "see more" click
+    // PATTERN box -> EYE-OPENING section
     document.querySelector('.see-more')?.addEventListener('click', function(e) {
         e.preventDefault();
         gentleScroll('#clients h3');
     });
 
-    // Make boxes clickable with careful timing
+    // CRITIQUE box -> TESTIMONIALS section
     document.querySelectorAll('.box').forEach(box => {
         const boxType = box.querySelector('h4').textContent.trim();
-        if (boxType === 'PATTERN') return;
-
-        box.style.cursor = 'pointer';
-        box.addEventListener('click', function(e) {
-            if (e.target.closest('.see-more')) return;
-
-            switch(boxType) {
-                case 'CRITIQUE':
-                    gentleScroll('#testimonials');
-                    break;
-                case 'ASSERTION':
-                    gentleScroll('.circle-link.view');
-                    break;
-            }
-        });
+        
+        if (boxType === 'CRITIQUE') {
+            box.style.cursor = 'pointer';
+            box.addEventListener('click', () => gentleScroll('#testimonials'));
+        }
+        
+        if (boxType === 'ASSERTION') {
+            box.style.cursor = 'pointer';
+            box.addEventListener('click', () => {
+                // Scroll to the Assertion Papers circle link
+                gentleScroll('a[href*="slingshot"]'); 
+            });
+        }
     });
 
-    // Improved image modal that pauses animations during view
+    // Image modal (unchanged)
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.close-modal');
@@ -1102,44 +1107,31 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.frame img').forEach(img => {
         img.addEventListener('click', function(e) {
             e.preventDefault();
-            e.stopPropagation();
-            
-            // Pause any running animations
-            document.body.classList.add('modal-open');
-            
             modal.classList.add('active');
             modalImg.src = this.src;
-            return false;
         });
     });
 
-    function closeModal() {
-        document.body.classList.remove('modal-open');
-        modal.classList.remove('active');
-    }
-
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal();
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') modal.classList.remove('active');
     });
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-    });
-
-    // Add this CSS via JavaScript to ensure smooth transitions
+    // Add required styles
     const style = document.createElement('style');
     style.textContent = `
-        .modal-open {
+        .smooth-scrolling {
             pointer-events: none;
         }
-        .modal-open * {
+        .smooth-scrolling [data-scroll] {
             animation-play-state: paused !important;
             transition: none !important;
         }
-        #imageModal.active ~ * {
-            filter: blur(2px);
-            transition: filter 0.3s ease;
+        #imageModal.active {
+            z-index: 1000;
         }
     `;
     document.head.appendChild(style);

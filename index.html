@@ -542,7 +542,7 @@
 
 <style>
  /* Fixed hover effect */
- #awards .frame {
+ .frame {
      cursor: pointer;
      position: relative;
      display: inline-block;
@@ -550,20 +550,20 @@
      vertical-align: middle;
  }
  
- #awards .award-image {
+ .award-image {
      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
      transform-origin: center;
      width: 100%;
      height: auto;
  }
  
- #awards .award-image:hover {
+ .award-image:hover {
      transform: scale(1.25);
      z-index: 100;
  }
  
  /* Remove conflicting frame transition */
- #awards .frame {
+ .frame {
      transition: none !important;
  }
  
@@ -615,220 +615,137 @@
      opacity: 0.8;
  }
 </style>
-<div id="awards">
-<figure class="frame bs-xl-3 bs-xl-os-3">
-    <img class="lazy award-image" src="images/7.png" data-src="images/7.png" alt="Award">
-</figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-12">
-    <img class="award-image" 
-         src="images/8.png" 
-         data-src="images/8.png" 
-         alt="Award Certificate">
-</figure>
+<!-- Original Awards Container -->
+<div class="awards-container">
+    <figure class="frame bs-xl-3 bs-xl-os-3">
+        <img class="lazy award-image" src="images/7.png" data-src="images/7.png" alt="Award">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/9.png" 
-         data-src="images/9.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-12">
+        <img class="award-image" src="images/8.png" data-src="images/8.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/10.png" 
-         data-src="images/10.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/9.png" data-src="images/9.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/11.png" 
-         data-src="images/11.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-10">
+        <img class="award-image" src="images/10.png" data-src="images/10.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/12.png" 
-         data-src="images/12.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/11.png" data-src="images/11.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/13.png" 
-         data-src="images/13.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/12.png" data-src="images/12.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-12">
-    <img class="award-image" 
-         src="images/14.png" 
-         data-src="images/14.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/13.png" data-src="images/13.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/15.png" 
-         data-src="images/15.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-12">
+        <img class="award-image" src="images/14.png" data-src="images/14.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/16.png" 
-         data-src="images/16.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/15.png" data-src="images/15.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/17.png" 
-         data-src="images/17.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-10">
+        <img class="award-image" src="images/16.png" data-src="images/16.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/18.png" 
-         data-src="images/18.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/17.png" data-src="images/17.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/19.png" 
-         data-src="images/19.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/18.png" data-src="images/18.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/20.png" 
-         data-src="images/20.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/19.png" data-src="images/19.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/21.png" 
-         data-src="images/21.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-10">
+        <img class="award-image" src="images/20.png" data-src="images/20.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/22.png" 
-         data-src="images/22.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/21.png" data-src="images/21.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/23.png" 
-         data-src="images/23.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/22.png" data-src="images/22.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-12">
-    <img class="award-image" 
-         src="images/24.png" 
-         data-src="images/24.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/23.png" data-src="images/23.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/25.png" 
-         data-src="images/25.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-12">
+        <img class="award-image" src="images/24.png" data-src="images/24.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/26.png" 
-         data-src="images/26.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/25.png" data-src="images/25.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/27.png" 
-         data-src="images/27.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-10">
+        <img class="award-image" src="images/26.png" data-src="images/26.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/28.png" 
-         data-src="images/28.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/27.png" data-src="images/27.png" alt="Award Certificate">
+    </figure>
 
-<figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/29.png" 
-         data-src="images/29.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/28.png" data-src="images/28.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/30.png" 
-         data-src="images/30.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/29.png" data-src="images/29.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/31.png" 
-         data-src="images/31.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-10">
+        <img class="award-image" src="images/30.png" data-src="images/30.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/32.png" 
-         data-src="images/32.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/31.png" data-src="images/31.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/33.png" 
-         data-src="images/33.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/32.png" data-src="images/32.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-12">
-    <img class="award-image" 
-         src="images/34.png" 
-         data-src="images/34.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/33.png" data-src="images/33.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-6">
-    <img class="award-image" 
-         src="images/35.png" 
-         data-src="images/35.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-12">
+        <img class="award-image" src="images/34.png" data-src="images/34.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-10">
-    <img class="award-image" 
-         src="images/36.png" 
-         data-src="images/36.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-6">
+        <img class="award-image" src="images/35.png" data-src="images/35.png" alt="Award Certificate">
+    </figure>
 
- <figure class="frame bs-xl-3 bs-xl-os-11">
-    <img class="award-image" 
-         src="images/37.png" 
-         data-src="images/37.png" 
-         alt="Award Certificate">
-</figure>
+    <figure class="frame bs-xl-3 bs-xl-os-10">
+        <img class="award-image" src="images/36.png" data-src="images/36.png" alt="Award Certificate">
+    </figure>
+
+    <figure class="frame bs-xl-3 bs-xl-os-11">
+        <img class="award-image" src="images/37.png" data-src="images/37.png" alt="Award Certificate">
+    </figure>
+</div>
+
+<div class="image-modal" id="imageModal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
 </div>
 
 <script>
@@ -837,14 +754,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.close-modal');
 
-    // Image click handler for all awards
-    document.querySelectorAll('#awards .frame img').forEach(img => {
-        img.addEventListener('click', (e) => {
+    // Image click handler - modified to prevent default behavior
+    document.querySelectorAll('.frame img').forEach(img => {
+        img.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
             modal.classList.add('active');
-            modalImg.src = e.target.src;
+            modalImg.src = this.src;
             document.body.classList.remove('typing');
+            return false;
         });
     });
 
@@ -855,24 +774,31 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => e.target === modal && closeModal());
-    document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
 
     // Text input handling
     document.querySelectorAll('input, textarea').forEach(element => {
         element.addEventListener('focus', () => {
             document.body.classList.add('typing');
-            modal.style.pointerEvents = 'none';
+            if (modal) modal.style.pointerEvents = 'none';
         });
 
         element.addEventListener('blur', () => {
             document.body.classList.remove('typing');
-            modal.style.pointerEvents = 'auto';
+            if (modal) modal.style.pointerEvents = 'auto';
         });
     });
 });
 </script>
-
 <div class="awards-content">
 <div class="line-anim">
 <svg width="11" height="9" xmlns="http://www.w3.org/2000/svg">

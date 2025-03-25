@@ -1,3 +1,10 @@
+[data-scroll] {
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 /* FOR PATTERNS */
 .patterns {
   width: 20.833vw;

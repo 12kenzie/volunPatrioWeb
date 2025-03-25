@@ -555,6 +555,7 @@
      transform-origin: center;
      width: 100%;
      height: auto;
+     display: block; /* Added this to prevent spacing issues */
  }
  
  .award-image:hover {
@@ -567,7 +568,7 @@
      transition: none !important;
  }
  
- /* Modal overlay (keep existing) */
+ /* Modal overlay */
  .image-modal {
      display: none;
      position: fixed;
@@ -743,62 +744,6 @@
     </figure>
 </div>
 
-<div class="image-modal" id="imageModal">
-    <span class="close-modal">&times;</span>
-    <img class="modal-content" id="modalImage">
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const closeBtn = document.querySelector('.close-modal');
-
-    // Image click handler - modified to prevent default behavior
-    document.querySelectorAll('.frame img').forEach(img => {
-        img.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            modal.classList.add('active');
-            modalImg.src = this.src;
-            document.body.classList.remove('typing');
-            return false;
-        });
-    });
-
-    // Close modal handlers
-    const closeModal = () => {
-        modal.classList.remove('active');
-        document.body.classList.remove('typing');
-    };
-
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeModal();
-        }
-    });
-
-    // Text input handling
-    document.querySelectorAll('input, textarea').forEach(element => {
-        element.addEventListener('focus', () => {
-            document.body.classList.add('typing');
-            if (modal) modal.style.pointerEvents = 'none';
-        });
-
-        element.addEventListener('blur', () => {
-            document.body.classList.remove('typing');
-            if (modal) modal.style.pointerEvents = 'auto';
-        });
-    });
-});
-</script>
 <div class="awards-content">
 <div class="line-anim">
 <svg width="11" height="9" xmlns="http://www.w3.org/2000/svg">
@@ -1039,5 +984,60 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="js/honey-ball.js"></script>
 <script src="js/main-three-scene.js"></script>
 <script src="js/main.js"></script>
+<div class="image-modal" id="imageModal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close-modal');
+
+    // Image click handler - modified to prevent default behavior
+    document.querySelectorAll('.frame img').forEach(img => {
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            modal.classList.add('active');
+            modalImg.src = this.src;
+            document.body.classList.remove('typing');
+            return false;
+        });
+    });
+
+    // Close modal handlers
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.classList.remove('typing');
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // Text input handling
+    document.querySelectorAll('input, textarea').forEach(element => {
+        element.addEventListener('focus', () => {
+            document.body.classList.add('typing');
+            if (modal) modal.style.pointerEvents = 'none';
+        });
+
+        element.addEventListener('blur', () => {
+            document.body.classList.remove('typing');
+            if (modal) modal.style.pointerEvents = 'auto';
+        });
+    });
+});
+</script>
 </body></html>

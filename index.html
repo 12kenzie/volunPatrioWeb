@@ -1121,4 +1121,72 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+     <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced scroll function with proper target finding
+    function scrollToAssertionPapers() {
+        // Find the exact Assertion Papers section
+        const assertionSection = document.querySelector('#awards .awards-content');
+        if (!assertionSection) return;
+        
+        // Temporarily disable other scroll effects
+        document.body.classList.add('no-scroll-effects');
+        
+        const startPos = window.pageYOffset;
+        const targetPos = assertionSection.getBoundingClientRect().top + startPos - 150; // Extra offset
+        const duration = 1200; // Slightly longer for better timing
+        
+        const startTime = performance.now();
+
+        function animateScroll(timestamp) {
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Smoother easing function
+            const ease = progress < 0.5 
+                ? 2 * progress * progress 
+                : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+            
+            window.scrollTo(0, startPos + (targetPos - startPos) * ease);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animateScroll);
+            } else {
+                // Re-enable effects after slight delay
+                setTimeout(() => {
+                    document.body.classList.remove('no-scroll-effects');
+                }, 300);
+            }
+        }
+
+        requestAnimationFrame(animateScroll);
+    }
+
+    // Update the ASSERTION box click handler
+    document.querySelectorAll('.box').forEach(box => {
+        const boxType = box.querySelector('h4').textContent.trim();
+        
+        if (boxType === 'ASSERTION') {
+            box.style.cursor = 'pointer';
+            box.addEventListener('click', scrollToAssertionPapers);
+        }
+    });
+
+    // Add this CSS to prevent interference
+    const style = document.createElement('style');
+    style.textContent = `
+        .no-scroll-effects [data-scroll] {
+            animation: none !important;
+            transition: none !important;
+        }
+        .box[style*="pointer"] {
+            transition: transform 0.2s ease;
+        }
+        .box[style*="pointer"]:hover {
+            transform: translateY(-3px);
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
 </body></html>

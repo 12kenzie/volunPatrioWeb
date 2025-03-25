@@ -1185,8 +1185,22 @@ document.addEventListener('DOMContentLoaded', function() {
         .box[style*="pointer"]:hover {
             transform: translateY(-3px);
         }
+        #awards .awards-content {
+    scroll-margin-top: 150px; /* Ensure proper spacing */
+}
     `;
     document.head.appendChild(style);
+});
+         // In your animation setup
+ScrollTrigger.create({
+    // ... other settings
+    onToggle: self => {
+        if (document.body.classList.contains('no-scroll-effects')) {
+            self.disable();
+        } else {
+            self.enable();
+        }
+    }
 });
 </script>
 </body></html>
